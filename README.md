@@ -18,3 +18,6 @@ Your goal is to shoot down other fidget spinners. Shots are fired with SpaceBar 
 
 If I have time I will add that you start with only 1 of 3 circles, and shooting an enemy circle down gains you a circle, and more circles means higher max speed.
 Uses Canvas.
+
+Game wireframe: https://wireframe.cc/avVOL9
+The game takes up the full screen, with all controls buttons and links transparent.
