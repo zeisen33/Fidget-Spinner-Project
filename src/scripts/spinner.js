@@ -13,7 +13,7 @@ class Spinner {
         ctx.fillStyle = "red";
         //x, y, width, height
         ctx.fillRect(this.x,this.y,40,50);
-        ctx.rotate(this.rads)
+        ctx.rotate(this.rads / 360.0)
     }
 
     animate (ctx) {

@@ -1,4 +1,4 @@
-class Circle {
+class Target {
     constructor (context){
         this.context = context
         this.x = 100
@@ -7,7 +7,8 @@ class Circle {
         this.move = this.move.bind(this)
     }
     
-    drawCircle (ctx){
+    drawTarget (ctx){
+        // debugger
         ctx.beginPath();
         ctx.arc(this.x, this.y, 20, 0, 2*Math.PI, true);
         ctx.strokeStyle = "green";
@@ -18,7 +19,7 @@ class Circle {
     }
 
     animate (ctx) {
-        this.drawCircle(ctx)
+        this.drawTarget(ctx)
     }
 
     move () {
@@ -28,5 +29,5 @@ class Circle {
     }
 }
 
-module.exports = Circle
+module.exports = Target
   

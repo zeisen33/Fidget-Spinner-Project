@@ -1,5 +1,7 @@
-const crc = require("./scripts/circle.js")
+const crc = require("./scripts/target.js")
 const spnr = require("./scripts/spinner.js")
+const Game = require("./scripts/game.js");
+const GameView = require("./scripts/game_view.js")
 
 document.addEventListener("DOMContentLoaded", function(){
     const canvasEl = document.getElementById("background");
@@ -11,8 +13,14 @@ document.addEventListener("DOMContentLoaded", function(){
     // canvasSpinner.height = 500
   
     const ctx = canvasEl.getContext("2d");
-    ctx.fillStyle = "purple";
+    // ctx.fillStyle = "purple";
     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+    const img = document.getElementById("bground")
+    ctx.drawImage(img, 0,0)
+
+    const game = new Game();
+    new GameView(game, ctx).start()
   
     // ctx.beginPath();
     // ctx.arc(100, 100, 20, 0, 2*Math.PI, true);
@@ -22,17 +30,30 @@ document.addEventListener("DOMContentLoaded", function(){
     // ctx.fillStyle = "blue";
     // ctx.fill();
 
-    const spinner = new spnr(ctx)
-    spinner.animate(spinner.context)
-    // ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
-    ctx.fillStyle = "red";
-    ctx.fillRect(300, 300, 100, 100);
-    setTimeout(spinner.move, 5000)
+    // const spinner = new spnr(ctx)
+    // spinner.animate(spinner.context)
+    // // ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
+    // ctx.fillStyle = "red";
+    // // ctx.fillRect(300, 300, 100, 100);
+    // // debugger
+    // setTimeout(spinner.move, 5000)
+    // // debugger
     // setTimeout(spinner.rotate, 4000)
 
-    const circle = new crc(ctx)
-    circle.animate(circle.context)
-    setTimeout(circle.move, 5000)
+    // debugger
+    // const circle = new crc(ctx)
+    // circle.animate(circle.context)
+    // setTimeout(circle.move, 5000)
+    // debugger
+    // let x = 200;
+    // function animate() {
+    //     requestAnimationFrame(animate);
+    //     ctx.clearRect(0,0,window.innerWidth,window.innerHeight)
+    //     const spinner = new spnr(ctx)
+    //     spinner.animate(spinner.context)
+    //     ctx.fillStyle = "red";
+    // }
+    // animate();
   });
 
 
