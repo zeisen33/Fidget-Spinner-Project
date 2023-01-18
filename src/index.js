@@ -1,5 +1,5 @@
 const target = require("./scripts/target.js")
-const spnr = require("./scripts/spinner.js")
+const spinner = require("./scripts/spinner.js")
 // const Game = require("./scripts/game.js");
 // const GameView = require("./scripts/game_view.js")
 
@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
  
     const targ = new target
+    const spnr = new spinner
     const ctxx = canvasEl.getContext("2d");
+    const backing = ctxx.createPattern(canvasEl, "repeat")
+
     targ.drawTarget(ctxx)
+    spnr.drawSpinner(ctxx)
     
     function animate(i) {
         const ctx = canvasEl.getContext("2d");
@@ -25,12 +29,15 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.drawImage(img, 0,0)
 
         targ.x += 1
+        // debugger
         targ.animate(ctx)
-        if (i < 400) {
-            setTimeout(function () {
-                animate(i + 1)
-            }, 100)
-        }
+        spnr.animate(ctx)
+        
+
+        // setTimeout(function () {
+        //     animate(i + 1)
+        // }, 500)
+
     }
     animate(0);
   }); 

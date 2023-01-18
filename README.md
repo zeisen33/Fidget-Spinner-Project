@@ -20,6 +20,7 @@ If I have time I will add that you start with only 1 of 3 circles, and shooting 
 Uses Canvas.
 
 Game wireframe: https://wireframe.cc/avVOL9
+
 The game takes up the full screen, with all controls buttons and links transparent.
 
 space_background.jpeg source: https://wallpaperaccess.com/2d-space
