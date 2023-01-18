@@ -1,19 +1,21 @@
-class Target {
-    constructor () {
-        this.x = 100
-        this.y = 100
+class MovingObject {
+    constructor(options) {
+        this.xPos = options.xPos
+        this.yPos = options.yPos
+        this.xVel = 0
+        this.yVel = 0
         this.animate = this.animate.bind(this)
         this.move = this.move.bind(this)
-        this.radius = 25
-    }
-     
-    drawTarget (ctx){
-        const targImg = document.getElementById("targetImg")
-        ctx.drawImage(targImg, this.x, this.y, 50, 50)
+        this.rads = 0
     }
 
     animate (ctx) {
-        this.drawTarget(ctx)
+        this.draw(ctx)
+    }
+
+    drawTarget (ctx){
+        const targImg = document.getElementById("targetImg")
+        ctx.drawImage(targImg, this.x, this.y, 50, 50)
     }
 
     move () {
