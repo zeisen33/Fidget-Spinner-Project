@@ -6,6 +6,7 @@ class Bullet {
         this.move = this.move.bind(this)
         this.radius = 10
         this.xSpeed = 1
+        this.ySpeed = 1
     }
 
     drawBullet (ctx) {
@@ -16,14 +17,20 @@ class Bullet {
     }
 
     animate (ctx) {
+        this.move()
         this.drawBullet(ctx)
     }
 
     move () {
         this.x += this.xSpeed
         this.y += this.ySpeed
-        this.animate(ctx)
+        this.drawBullet(ctx)
     }
+
+    // hitTarget () {
+    //     this.remove()
+    //     targ.hit
+    // }
 }
 
 module.exports = Bullet

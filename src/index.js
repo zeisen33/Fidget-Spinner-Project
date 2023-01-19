@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     targ.drawTarget(ctxx)
     spnr.drawSpinner(ctxx)
-    bllt.drawBullet(ctxx)
+    // bllt.drawBullet(ctxx)
     
     function animate(i) {
         const ctx = canvasEl.getContext("2d");

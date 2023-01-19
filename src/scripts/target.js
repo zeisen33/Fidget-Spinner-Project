@@ -21,6 +21,7 @@ class Target {
         this.y += 10;
         this.animate(this.context)
     }
+
 }
 
 module.exports = Target

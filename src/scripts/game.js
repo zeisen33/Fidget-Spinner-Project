@@ -1,17 +1,26 @@
 // const Target = require("./target.js");
+// const Bullet = require("./bullet.js");
+// const Spinner = require("./spinner.js")
 
 // function Game() {
 //     this.targets = [];
-//     this.addTarget();
+//     this.bullets = [];
+//     this.spinners = []
 // }
 
 // Game.prototype.allObjects = function allObjects() {
-//     return [].concat(this.targets)
+//     return [].concat(this.targets, this.bullets, this.spinners)
 // }
 
 // Game.prototype.add = function add(object) {
 //     if (object instanceof Target) {
 //         this.targets.push(object);
+//     } else if (object instanceof Bullet) {
+//         this.bullets.push(object);
+//     } else if (object instanceof Spinner) {
+//         this.spinners.push(object);
+//     } else {
+//         throw new Error("unknown type of object")
 //     }
 // }
 

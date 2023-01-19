@@ -1,11 +1,11 @@
 // function GameView(game, ctx) {
 //     this.ctx = ctx;
 //     this.game = game;
-//     // this.target = this.game.addTarget();
+// //     // this.target = this.game.addTarget();
 // }
 
 // GameView.prototype.start = function start() {
-//     // this.bindKeyHandlers();
+// //     // this.bindKeyHandlers();
 //     this.lastTime = 0;
 
 //     requestAnimationFrame(this.animate.bind(this));
@@ -16,6 +16,8 @@
 
 //     this.game.step(timeDelta);
 //     this.game.draw(this.ctx);
+
+//     requestAnimationFrame(this.animate.bind(this));
 // }
 
 // module.exports = GameView;
