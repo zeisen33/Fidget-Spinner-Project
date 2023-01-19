@@ -13,15 +13,15 @@ class Bullet {
         // debugger
         const blltImg = document.getElementById("bulletImg");
         // debugger
-        ctx.drawImg(blltImg, this.x, this.y, 50, 50);
+        ctx.drawImage(blltImg, this.x, this.y, 50, 50);
     }
 
     animate (ctx) {
-        this.move()
-        this.drawBullet(ctx)
+        this.move(ctx)
+        // this.drawBullet(ctx)
     }
 
-    move () {
+    move (ctx) {
         this.x += this.xSpeed
         this.y += this.ySpeed
         this.drawBullet(ctx)
