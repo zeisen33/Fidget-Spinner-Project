@@ -1,5 +1,6 @@
 const target = require("./scripts/target.js")
 const spinner = require("./scripts/spinner.js")
+const bullet = require("./scripts/bullet.js")
 // const Game = require("./scripts/game.js");
 // const GameView = require("./scripts/game_view.js")
 
@@ -11,11 +12,13 @@ document.addEventListener("DOMContentLoaded", function(){
  
     const targ = new target
     const spnr = new spinner
+    const bllt = new bullet
     const ctxx = canvasEl.getContext("2d");
     const backing = ctxx.createPattern(canvasEl, "repeat")
 
     targ.drawTarget(ctxx)
     spnr.drawSpinner(ctxx)
+    bllt.drawBullet(ctxx)
     
     function animate(i) {
         const ctx = canvasEl.getContext("2d");
@@ -32,12 +35,6 @@ document.addEventListener("DOMContentLoaded", function(){
         // debugger
         targ.animate(ctx)
         spnr.animate(ctx)
-        
-
-        // setTimeout(function () {
-        //     animate(i + 1)
-        // }, 500)
-
     }
     animate(0);
   }); 
