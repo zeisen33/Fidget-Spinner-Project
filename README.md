@@ -1,4 +1,5 @@
 # Fidget-Spinner-Project
+Next step: add links
 
 A fidget spinner game. You play as a fidget spinner set in space (2D plane). You move in the direction of your mouse. You speed up by pressing WAD rhythmically, the closer to on rhythm the better. There's a little screen in the bottom left corner to show timing button presses.
 
