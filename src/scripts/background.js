@@ -1,10 +1,13 @@
-class Background {
-    constructor () {
+const MovingObject = require ("./moving_object")
+
+class Background extends MovingObject {
+    constructor (options) {
+        super(options)
         this.bgroundImg = document.getElementById("bground");
         this.height = window.innerHeight;
         this.width = window.innerWidth;
-        this.ySpeed = 10;
-        this.xSpeed = 0;
+        this.vel.y = 0;
+        this.vel.x = 0;
         this.scrollHeight = 0;
         this.animate = this.animate.bind(this)
         this.moveUp = this.moveUp.bind(this)
@@ -14,9 +17,9 @@ class Background {
     }
 
     moveUp () {
-        let newScrollHeight = (this.scrollHeight + this.ySpeed) % this.height;
+        let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
         if (this.yRepeatCount < this.maxYRepeats || newScrollHeight <= this.stoppingHeight ) {
-            this.scrollHeight += this.ySpeed;
+            this.scrollHeight += this.vel.y;
             this.yRepeatCount += Math.floor(this.scrollHeight / this.height)
             this.scrollHeight %= this.height;
         }

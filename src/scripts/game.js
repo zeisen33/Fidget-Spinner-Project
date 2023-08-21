@@ -1,7 +1,81 @@
-// const Target = require("./target.js");
-// const Bullet = require("./bullet.js");
-// const Spinner = require("./spinner.js")
 
+
+const Target = require("./target.js");
+const Bullet = require("./bullet.js");
+const Spinner = require("./spinner.js")
+const Background = require("./background.js")
+
+class Game {
+    constructor(ctx) {
+        this.ctx = ctx
+        this.spinners = []
+        this.targets = []
+        this.bullets = []
+        this.background = new Background({pos: this.randomPosition(), game: this})
+
+        this.addTarget()
+    }
+
+    add(object) {
+        if (object instanceof Target) {
+            this.targets.push(object)
+        } else if (object instanceof Bullet) {
+            this.bullets.push(object)
+        } else if (object instanceof Spinner) {
+            this.spinners.push(object)
+        } else {
+            throw new Error("unknown type of object")
+        }
+    }
+
+    addTarget() {
+        this.add(new Target({pos: this.randomPosition(), game: this}))
+    }
+
+    addSpinner() {
+        const spinner = new Spinner({game: this})
+        this.add(spinner)
+        return spinner
+    }
+
+    randomPosition() {
+        const xPos = Math.random() * window.innerWidth
+        const yPos = Math.random() * window.innerHeight
+        return {x: xPos, y: yPos}
+    }
+
+    draw(ctx) {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+        this.allObjects().forEach(object => object.draw(ctx))
+    }
+
+    moveObjects(delta) {
+        this.allObjects().forEach(object => object.move(delta))
+    }
+
+    step(delta) {
+        this.moveObjects(delta)
+    }
+
+    remove(object) {
+        if (object instanceof Bullet) {
+            this.bullets.splice(this.bullets.indexOf(object), 1);
+          } else if (object instanceof Target) {
+            this.targets.splice(this.targets.indexOf(object), 1);
+          } else if (object instanceof Spinner) {
+            this.spinners.splice(this.spinners.indexOf(object), 1);
+          } else {
+            throw new Error("unknown type of object");
+          }
+    }
+
+    allObjects() {
+        const allObjects = [].concat(this.spinners, this.targets, this.bullets, this.background)
+        return allObjects
+    }
+}
+
+module.exports = Game
 // function Game() {
 //     this.targets = [];
 //     this.bullets = [];

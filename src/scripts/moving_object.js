@@ -1,11 +1,10 @@
 class MovingObject {
     constructor(options) {
-        this.xPos = options.xPos
-        this.yPos = options.yPos
-        this.xVel = 0
-        this.yVel = 0
+        this.pos = options.pos
+        this.vel = options.vel || {x: 0, y: 0}
         this.animate = this.animate.bind(this)
         this.move = this.move.bind(this)
+        this.game = options.game
         this.rads = 0
     }
 
@@ -15,15 +14,15 @@ class MovingObject {
 
     drawTarget (ctx){
         const targImg = document.getElementById("targetImg")
-        ctx.drawImage(targImg, this.x, this.y, 50, 50)
+        ctx.drawImage(targImg, this.pos.x, this.pos.y, 50, 50)
     }
 
     move () {
-        this.x += 10;
-        this.y += 10;
-        this.animate(this.context)
+        this.pos.x += 10;
+        this.pos.y += 10;
+        this.animate(this.game.ctx)
     }
 }
 
-module.exports = Target
+module.exports = MovingObject
   

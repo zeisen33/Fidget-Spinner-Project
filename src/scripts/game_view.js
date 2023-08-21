@@ -1,3 +1,36 @@
+
+
+class GameView {
+    constructor(game, ctx) {
+        this.game = game
+        this.ctx = ctx
+        this.spinner = this.game.addSpinner()
+    }
+
+    start() {
+        this.bindKeyHandlers()
+        this.lastTime = 0
+        requestAnimationFrame(this.animate.bind(this))
+    }
+
+    bindKeyHandlers() {
+        const spinner = this.spinner
+
+        key('space', () => spinner.fireBullet())
+    }
+
+    animate(currTime) {
+        const timeDelta = currTime - this.lastTime
+
+        this.game.step(timeDelta)
+        this.game.draw(this.ctx)
+        this.lastTime = currTime
+
+        requestAnimationFrame(this.animate.bind(this))
+    }
+}
+
+
 // function GameView(game, ctx) {
 //     this.ctx = ctx;
 //     this.game = game;
@@ -20,4 +53,4 @@
 //     requestAnimationFrame(this.animate.bind(this));
 // }
 
-// module.exports = GameView;
+module.exports = GameView;
