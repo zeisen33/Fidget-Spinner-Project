@@ -1,27 +1,16 @@
-class Target {
-    constructor () {
-        this.x = 100
-        this.y = 100
-        this.animate = this.animate.bind(this)
-        this.move = this.move.bind(this)
-        this.radius = 25
+const MovingObject = require("./moving_object")
+
+class Target extends MovingObject {
+    static RADIUS = 25
+
+    constructor (options) {
+        super(options)
     }
      
-    drawTarget (ctx){
+    draw (ctx){
         const targImg = document.getElementById("targetImg")
-        ctx.drawImage(targImg, this.x, this.y, 50, 50)
+        ctx.drawImage(targImg, this.pos.x, this.pos.y, Target.RADIUS * 2, Target.RADIUS * 2)
     }
-
-    animate (ctx) {
-        this.drawTarget(ctx)
-    }
-
-    move () {
-        this.x += 10;
-        this.y += 10;
-        this.animate(this.context)
-    }
-
 }
 
 module.exports = Target

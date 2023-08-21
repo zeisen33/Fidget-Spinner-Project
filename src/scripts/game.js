@@ -6,8 +6,7 @@ const Spinner = require("./spinner.js")
 const Background = require("./background.js")
 
 class Game {
-    constructor(ctx) {
-        this.ctx = ctx
+    constructor() {
         this.spinners = []
         this.targets = []
         this.bullets = []
@@ -46,7 +45,10 @@ class Game {
 
     draw(ctx) {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-        this.allObjects().forEach(object => object.draw(ctx))
+        this.allObjects().forEach(object => {
+            console.log(object)
+            object.draw(ctx)
+        })
     }
 
     moveObjects(delta) {
@@ -70,7 +72,7 @@ class Game {
     }
 
     allObjects() {
-        const allObjects = [].concat(this.spinners, this.targets, this.bullets, this.background)
+        const allObjects = [].concat(this.background, this.spinners, this.targets, this.bullets)
         return allObjects
     }
 }

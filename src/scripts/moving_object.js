@@ -1,26 +1,22 @@
 class MovingObject {
     constructor(options) {
-        this.pos = options.pos
         this.vel = options.vel || {x: 0, y: 0}
-        this.animate = this.animate.bind(this)
-        this.move = this.move.bind(this)
         this.game = options.game
+        this.pos = options.pos || this.game.randomPosition()
         this.rads = 0
+        this.ctx = this.game.ctx
     }
 
-    animate (ctx) {
-        this.draw(ctx)
+    move(delta) {
+        delta = delta || 1
+        this.pos.x += this.vel.x * delta / 20;
+        this.pos.y += this.vel.y * delta / 20;
+
+        // const pos = this.pos
     }
 
-    drawTarget (ctx){
-        const targImg = document.getElementById("targetImg")
-        ctx.drawImage(targImg, this.pos.x, this.pos.y, 50, 50)
-    }
-
-    move () {
-        this.pos.x += 10;
-        this.pos.y += 10;
-        this.animate(this.game.ctx)
+    remove(object) {
+        this.game.remove(this)
     }
 }
 

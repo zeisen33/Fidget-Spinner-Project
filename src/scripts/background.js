@@ -9,8 +9,6 @@ class Background extends MovingObject {
         this.vel.y = 0;
         this.vel.x = 0;
         this.scrollHeight = 0;
-        this.animate = this.animate.bind(this)
-        this.moveUp = this.moveUp.bind(this)
         this.yRepeatCount = 0
         this.maxYRepeats = 4
         this.stoppingHeight = window.innerHeight/2.0 - 80
@@ -26,7 +24,7 @@ class Background extends MovingObject {
         
     }
 
-    drawBackground (ctx) {
+    draw (ctx) {
         // bottom of screen = top of image
         // if (this.yRepeatCount <= this.maxYRepeats) {
             ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
@@ -36,12 +34,6 @@ class Background extends MovingObject {
         // top of screen = bottom of image
             ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
         }
-    }
-
-
-    animate (ctx) {
-        this.moveUp ()
-        this.drawBackground(ctx)
     }
 }
 
