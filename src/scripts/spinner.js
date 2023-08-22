@@ -27,6 +27,10 @@ class Spinner extends MovingObject {
         
         ctx.restore()
     }
+
+    fireBullet() {
+        const bullet = new Bullet()
+    }
 }
 
 module.exports = Spinner
