@@ -75,6 +75,25 @@ class Game {
         const allObjects = [].concat(this.background, this.spinners, this.targets, this.bullets)
         return allObjects
     }
+
+    up() {
+        console.log('up')
+        console.log(this.background.vel)
+        this.background.vel.y += 1
+        console.log(this.background.vel)
+    }
+
+    down() {
+
+    }
+
+    left() {
+
+    }
+
+    right() {
+
+    }
 }
 
 module.exports = Game

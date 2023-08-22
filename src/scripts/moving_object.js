@@ -9,10 +9,13 @@ class MovingObject {
 
     move(delta) {
         delta = delta || 1
-        this.pos.x += this.vel.x * delta / 20;
-        this.pos.y += this.vel.y * delta / 20;
+        console.log(`object: ${this}`)
+        console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
+        console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
+        this.pos.x += this.vel.x * delta / 40;
+        this.pos.y += this.vel.y * delta / 40;
 
-        // const pos = this.pos
+        // const pos = this.pos           
     }
 
     remove(object) {

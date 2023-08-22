@@ -15,8 +15,13 @@ class GameView {
 
     bindKeyHandlers() {
         const spinner = this.spinner
+        const game = this.game
 
         key('space', () => spinner.fireBullet())
+        key('up', () => game.up())
+        key('down', () => game.down())
+        key('left', () => game.left())
+        key('right', () => game.right())
     }
 
     animate(currTime) {
