@@ -1,6 +1,6 @@
 export const randomVec = (length) => {
     const deg = 2 * Math.PI * Math.random()
-    return SVGFEFuncAElement({x: Math.sin(deg), y: Math.cos(deg)}, length)
+    return scale({x: Math.sin(deg), y: Math.cos(deg)}, length)
 }
 
 export const scale = (vec, m) => {

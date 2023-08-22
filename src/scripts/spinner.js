@@ -1,4 +1,6 @@
 const MovingObject = require("./moving_object")
+const Util = require("./util")
+const Bullet = require("./bullet")
 
 class Spinner extends MovingObject {
     static SPINNER_SIZE = 150
@@ -29,7 +31,25 @@ class Spinner extends MovingObject {
     }
 
     fireBullet() {
-        const bullet = new Bullet()
+        const norm = Util.norm(this.vel)
+        console.log(norm)
+
+        if (norm === 0) {
+            return
+        }
+
+        const relVel = Util.scale(Util.dir(this.vel), Bullet.SPEED)
+
+        const bulletVel = {x: relVel.x + this.vel.x, y: relVel.y + this.vel.y}
+
+        const bullet = new Bullet({
+            vel: bulletVel,
+            pos: this.pos,
+            game: this.game
+        })
+
+        console.log(bullet)
+        this.game.add(bullet)
     }
 }
 

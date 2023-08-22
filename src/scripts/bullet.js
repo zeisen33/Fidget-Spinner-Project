@@ -2,10 +2,10 @@ const MovingObject = require("./moving_object")
 
 class Bullet extends MovingObject{
     static RADIUS = 10
-    static X_SPEED = 5
-    static Y_SPEED = 5
+    static SPEED = 5
 
     constructor (options) {
+        super(options)
         this.pos = {x: 200, y: 200}
     }
 
