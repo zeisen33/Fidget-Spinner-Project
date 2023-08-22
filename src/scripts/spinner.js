@@ -11,10 +11,13 @@ class Spinner extends MovingObject {
         const innerWidth = window.innerWidth
 
         super(options)
+        // console.log(this.game.background.vel)
         this.pos = {x: innerWidth/2.0 - Spinner.SPINNER_SIZE/2.0, y: innerHeight/2.0 - Spinner.SPINNER_SIZE/2.0}
         this.rads = 0
         this.center = {x: innerWidth/2.0, y: innerHeight/2.0}
         this.angularSpd = Spinner.MIN_ANG_SPD
+        this.hiddenVel = this.game.background.vel
+    
     }
 
     draw(ctx) {
@@ -31,16 +34,16 @@ class Spinner extends MovingObject {
     }
 
     fireBullet() {
-        const norm = Util.norm(this.vel)
-        console.log(norm)
+        const norm = Util.norm(this.hiddenVel)
+        // console.log(norm)
 
         if (norm === 0) {
             return
         }
 
-        const relVel = Util.scale(Util.dir(this.vel), Bullet.SPEED)
+        const relVel = Util.scale(Util.dir(this.hiddenVel), Bullet.SPEED)
 
-        const bulletVel = {x: relVel.x + this.vel.x, y: relVel.y + this.vel.y}
+        const bulletVel = {x: relVel.x + this.hiddenVel.x, y: relVel.y + this.hiddenVel.y}
 
         const bullet = new Bullet({
             vel: bulletVel,
@@ -48,7 +51,7 @@ class Spinner extends MovingObject {
             game: this.game
         })
 
-        console.log(bullet)
+        // console.log(bullet)
         this.game.add(bullet)
     }
 }

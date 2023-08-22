@@ -10,7 +10,7 @@ class Game {
         this.spinners = []
         this.targets = []
         this.bullets = []
-        this.background = new Background({pos: this.randomPosition(), game: this})
+        this.background = new Background({pos: {x: 0, y: 0}, game: this})
 
         this.addTarget()
     }
