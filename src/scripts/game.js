@@ -6,6 +6,9 @@ const Spinner = require("./spinner.js")
 const Background = require("./background.js")
 
 class Game {
+    static WIDTH = 4000
+    static HEIGHT = 2500
+
     constructor() {
         this.spinners = []
         this.targets = []
@@ -93,6 +96,19 @@ class Game {
 
     right() {
         this.background.x -= 1
+    }
+
+
+    isXoutOfBounds(pos) {
+        return pos.x > Game.WIDTH || pos.x < -1 * Game.WIDTH
+    }
+
+    isYoutOfBounds(pos) {
+        return pos.y > Game.HEIGHT || pos.y < -1 * Game.HEIGHT
+    }
+
+    isOutOfBounds(pos) {
+        return this.isXoutOfBounds(pos) || this.isYoutOfBounds(pos)
     }
 }
 
