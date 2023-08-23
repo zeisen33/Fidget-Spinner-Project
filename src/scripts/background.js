@@ -27,6 +27,9 @@ class Background extends MovingObject {
     // }
 
     draw (ctx) {
+        console.log(`pos: ${JSON.stringify(this.pos.y)}`)
+        console.log(`vel: ${this.vel.y}`)
+        console.log(`scrollHeight: ${this.scrollHeight}`)
         let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
         if (this.yRepeatCount < this.maxYRepeats || newScrollHeight <= this.stoppingHeight ) {
             this.scrollHeight += this.vel.y;

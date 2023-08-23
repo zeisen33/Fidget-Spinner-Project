@@ -9,9 +9,9 @@ class MovingObject {
 
     move(delta) {
         delta = delta || 1
-        console.log(`object: ${this}`)
-        console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
-        console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
+        // console.log(`object: ${this}`)
+        // console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
+        // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
         this.pos.x += this.vel.x * delta / 40;
         this.pos.y += this.vel.y * delta / 40;
 

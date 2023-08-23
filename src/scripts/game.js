@@ -46,7 +46,7 @@ class Game {
     draw(ctx) {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
         this.allObjects().forEach(object => {
-            console.log(object)
+            // console.log(object)
             object.draw(ctx)
         })
     }
@@ -77,22 +77,22 @@ class Game {
     }
 
     up() {
-        console.log('up')
-        console.log(this.background.vel)
+        // console.log('up')
+        // console.log(this.background.vel)
         this.background.vel.y += 1
-        console.log(this.background.vel)
+        // console.log(this.background.vel)
     }
 
     down() {
-
+        this.background.vel.y -= 1
     }
 
     left() {
-
+        this.background.x += 1
     }
 
     right() {
-
+        this.background.x -= 1
     }
 }
 
