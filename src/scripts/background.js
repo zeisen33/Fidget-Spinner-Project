@@ -2,8 +2,8 @@ const MovingObject = require ("./moving_object")
 const Game = require("./game")
 
 class Background extends MovingObject {
-    static STOP_HEIGHT = 4000
-    static STOP_WIDTH = 2500
+    // static STOP_HEIGHT = 4000
+    // static STOP_WIDTH = 2500
 
     constructor (options) {
         super(options)
@@ -14,45 +14,62 @@ class Background extends MovingObject {
         this.yRepeatCount = 0
         this.maxYRepeats = 4
         this.stoppingHeight = window.innerHeight/2.0 - 80
+        this.stopHeight = window.innerHeight * 4
         // this.stopHeight = Game.HEIGHT
         // this.stopWidth = Game.WIDTH
     }
 
-    // moveUp () {
-        // let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
-        // if (this.yRepeatCount < this.maxYRepeats || newScrollHeight <= this.stoppingHeight ) {
-        //     this.scrollHeight += this.vel.y;
-        //     this.yRepeatCount += Math.floor(this.scrollHeight / this.height)
-        //     this.scrollHeight %= this.height;
-        // }
-        
-    // }
+    moveUp () {
+        // alert('moveUp')
+        let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
+        if (this.pos.y < this.stopHeight || newScrollHeight <= this.stoppingHeight ) {
+            this.scrollHeight += this.vel.y;
+            // this.yRepeatCount += Math.floor(this.scrollHeight / this.height)
+            this.scrollHeight %= this.height;
+        } else {
+            this.pos.y = this.stopHeight
+            this.vel.y = 0
+        }
+    }
+
+    moveDown() {
+        // alert('moveDown')
+        let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height
+        if (this.pos.y > -1 * this.stopHeight || newScrollHeight >= -1 * this.stoppingHeight) {
+            this.scrollHeight += this.vel.y
+            // this.yRepeatCount -= Math.floor(this.scrollHeight / this.height)
+            this.scrollHeight %= -1 * this.height
+        } else {
+            this.pos.y = -1 * this.stopHeight
+            this.vel.y = 0
+        }
+    }
 
     // draw(ctx) {
     //     ctx.drawImage(this.bgroundImg, this.pos.x, this.pos.y)
     // }
 
     draw (ctx) {
-        console.log(Background.STOP_HEIGHT)
-        console.log(Background.STOP_WIDTH)
+        console.log('draw')
+        // console.log(Background.STOP_HEIGHT)
+        // console.log(Background.STOP_WIDTH)
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         console.log(`vel: ${this.vel.y}`)
         console.log(`scrollHeight: ${this.scrollHeight}`)
-        console.log(`yRepeats: ${this.yRepeatCount}`)
+        // console.log(`yRepeats: ${this.yRepeatCount}`)
 
         let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
-        if (this.yRepeatCount < this.maxYRepeats || newScrollHeight <= this.stoppingHeight ) {
-            this.scrollHeight += this.vel.y;
-            if (this.vel.y === 0) {
-                
-            } else if (this.vel.y > 0) {
-                this.yRepeatCount += Math.floor(this.scrollHeight / this.height)
-            } else {
-                this.yRepeatCount += Math.ceil(this.scrollHeight / this.height)
-            }
-            this.scrollHeight %= this.height;
-        } else {
+        
+        console.log(`newScrollHeight: ${newScrollHeight}`)
+
+        if (this.game.isYoutOfBounds(this.pos)) {
             this.vel.y = 0
+        }
+        
+        if (this.vel.y > 0) {
+            this.moveUp()
+        } else if (this.vel.y < 0) {
+            this.moveDown()
         }
         
 
@@ -65,11 +82,9 @@ class Background extends MovingObject {
         // top of screen = bottom of image
             ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
         }
-    
 
-        // if (this.game.isYoutOfBounds(this.pos)) {
-        //     this.vel.y = 0
-        // }
+
+
     }
 }
 
