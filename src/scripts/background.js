@@ -37,7 +37,7 @@ class Background extends MovingObject {
         let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height
         if (this.pos.y > -1 * this.stopHeight || newScrollHeight >= -1 * this.stoppingHeight) {
             this.scrollHeight += this.vel.y
-            // this.yRepeatCount -= Math.floor(this.scrollHeight / this.height)
+            // this.yRepeatCount -= Math.ceil(this.scrollHeight / this.height)
             this.scrollHeight %= -1 * this.height
         } else {
             this.pos.y = -1 * this.stopHeight
@@ -56,13 +56,16 @@ class Background extends MovingObject {
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         console.log(`vel: ${this.vel.y}`)
         console.log(`scrollHeight: ${this.scrollHeight}`)
-        // console.log(`yRepeats: ${this.yRepeatCount}`)
+        console.log(`yRepeats: ${this.yRepeatCount}`)
 
-        let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height;
-        
-        console.log(`newScrollHeight: ${newScrollHeight}`)
 
-        if (this.game.isYoutOfBounds(this.pos)) {
+        if (this.pos.y > this.stopHeight) {
+            this.pos.y = this.stopHeight
+            this.vel.y = 0
+            // this.clearRect()
+        }
+        if (this.pos.y < -1 * this.stopHeight) {
+            this.pos.y = -1 * this.stopHeight
             this.vel.y = 0
         }
         
@@ -72,16 +75,47 @@ class Background extends MovingObject {
             this.moveDown()
         }
         
+        if (this.pos.y > this.stopHeight) {
+            alert(`y: ${this.pos.y}`)
+        }
+
+        // CASES
+
+        // Split into y pos, y neg, y pos && stopY % y != stopY - y
+
+
+        
+
+
+
+
 
         // bottom of screen = top of image
-        if (this.yRepeatCount <= this.maxYRepeats) {
+        if (this.pos.y < this.stopHeight) {
             ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
         }
 
-        if (this.yRepeatCount < this.maxYRepeats) {
         // top of screen = bottom of image
+        if (this.pos.y < this.stopHeight) {
             ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
         }
+
+
+
+
+        // if (this.yRepeatCount > this.maxYRepeats) {
+        //     alert(`y: ${this.pos.y}`)
+        // }
+
+        // // bottom of screen = top of image
+        // if (this.yRepeatCount <= this.maxYRepeats) {
+        //     ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
+        // }
+
+        // // top of screen = bottom of image
+        // if (this.yRepeatCount < this.maxYRepeats) {
+        //     ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
+        // }
 
 
 

@@ -7,7 +7,7 @@ const Background = require("./background.js")
 
 class Game {
     static WIDTH = 4000
-    static HEIGHT = 2500
+    static HEIGHT = 4 * window.innerHeight
 
     constructor() {
         this.spinners = []
