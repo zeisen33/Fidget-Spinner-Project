@@ -81,9 +81,20 @@ class Background extends MovingObject {
 
         // CASES
 
-        // Split into y pos, y neg, y pos && stopY % y != stopY - y
+        // Split into y pos, y neg, y pos && within innerHeight of stopHeight
 
-
+        if (this.pos.y >= 0) {
+            // y pos and close to stop
+            if (this.stopHeight - this.height < this.pos.y) {
+                console.log('stopping')
+                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
+                ctx.clearRect(0, 0, this.width, this.stoppingHeight)
+            } else {
+                console.log('going')
+                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
+                ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
+            }
+        }
         
 
 
@@ -91,14 +102,14 @@ class Background extends MovingObject {
 
 
         // bottom of screen = top of image
-        if (this.pos.y < this.stopHeight) {
-            ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
-        }
+        // if (this.pos.y < this.stopHeight) {
+        //     ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
+        // }
 
         // top of screen = bottom of image
-        if (this.pos.y < this.stopHeight) {
-            ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
-        }
+        // if (this.pos.y < this.stopHeight) {
+        //     ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
+        // }
 
 
 
