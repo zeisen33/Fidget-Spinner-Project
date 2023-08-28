@@ -1,5 +1,6 @@
 const MovingObject = require ("./moving_object")
 const Game = require("./game")
+const Util = require("./util")
 
 class Background extends MovingObject {
     // static STOP_HEIGHT = 4000
@@ -89,9 +90,15 @@ class Background extends MovingObject {
                 console.log('stopping')
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
                 ctx.clearRect(0, 0, this.width, this.stoppingHeight)
+                // Util.drawCircle(this.ctx, "green", {x: 0, y: 0})
+                // Util.drawCitcle(this.ctx, "red", {x: 0, y: this.stoppingHeight})
             } else {
                 console.log('going')
+
+                // Bottom of screen = top of Image
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
+                
+                // Top of screen = bottom of image
                 ctx.drawImage(this.bgroundImg, 0, this.height - this.scrollHeight, this.width, this.scrollHeight, 0, 0, this.width, this.scrollHeight)
             }
         }

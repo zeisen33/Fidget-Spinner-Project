@@ -29,3 +29,18 @@ export const dir = (vec) => {
     const normed = norm(vec)
     return scale(vec, 1 / normed)
 }
+
+export const drawCircle = (ctx, color, pos) => {
+    ctx.fillStyle = color
+    ctx.beginPath()
+
+    ctx.arc(
+        pos.x,
+        pos.y,
+        10,
+        2 * Math.PI,
+        false
+    )
+
+    ctx.fill()
+}
