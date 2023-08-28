@@ -88,10 +88,12 @@ class Background extends MovingObject {
             // y pos and close to stop
             if (this.stopHeight - this.height < this.pos.y) {
                 console.log('stopping')
+                console.log(`stoppingHeight: ${this.stoppingHeight}`)
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
-                ctx.clearRect(0, 0, this.width, this.stoppingHeight)
+                ctx.clearRect(0, 0, this.width, this.scrollHeight)
                 // Util.drawCircle(this.ctx, "green", {x: 0, y: 0})
-                // Util.drawCitcle(this.ctx, "red", {x: 0, y: this.stoppingHeight})
+                // Util.drawCircle(this.ctx, "red", {x: 0, y: this.stoppingHeight})
+                // Util.drawCircle(this.ctx, "blue", {x: 0, y: this.scrollHeight})
             } else {
                 console.log('going')
 
