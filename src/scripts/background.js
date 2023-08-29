@@ -12,8 +12,8 @@ class Background extends MovingObject {
         this.height = window.innerHeight;
         this.width = window.innerWidth;
         this.scrollHeight = 0;
-        this.yRepeatCount = 0
-        this.maxYRepeats = 4
+        // this.yRepeatCount = 0
+        // this.maxYRepeats = 4
         this.stoppingHeight = window.innerHeight/2.0 - 80
         this.stopHeight = window.innerHeight * 4
         // this.stopHeight = Game.HEIGHT
@@ -28,8 +28,10 @@ class Background extends MovingObject {
             // this.yRepeatCount += Math.floor(this.scrollHeight / this.height)
             this.scrollHeight %= this.height;
         } else {
+            console.log(`boundary reached`)
             this.pos.y = this.stopHeight
             this.vel.y = 0
+            this.scrollHeight = this.stoppingHeight
         }
     }
 
@@ -91,9 +93,9 @@ class Background extends MovingObject {
                 console.log(`stoppingHeight: ${this.stoppingHeight}`)
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
                 ctx.clearRect(0, 0, this.width, this.scrollHeight)
-                // Util.drawCircle(this.ctx, "green", {x: 0, y: 0})
-                // Util.drawCircle(this.ctx, "red", {x: 0, y: this.stoppingHeight})
-                // Util.drawCircle(this.ctx, "blue", {x: 0, y: this.scrollHeight})
+                Util.drawCircle(ctx, "green", {x: 0, y: 0})
+                Util.drawCircle(ctx, "red", {x: 0, y: this.stoppingHeight})
+                Util.drawCircle(ctx, "blue", {x: 0, y: this.scrollHeight})
             } else {
                 console.log('going')
 

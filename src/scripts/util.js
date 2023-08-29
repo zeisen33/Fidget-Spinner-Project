@@ -31,6 +31,8 @@ export const dir = (vec) => {
 }
 
 export const drawCircle = (ctx, color, pos) => {
+    console.log(color)
+    console.log(`ctx: ${ctx}`)
     ctx.fillStyle = color
     ctx.beginPath()
 
