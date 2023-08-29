@@ -18,6 +18,8 @@ class Background extends MovingObject {
         this.stopHeight = window.innerHeight * 4
         // this.stopHeight = Game.HEIGHT
         // this.stopWidth = Game.WIDTH
+        this.stopping = false
+        this.stoppingChanged = false
     }
 
     moveUp () {
@@ -88,7 +90,23 @@ class Background extends MovingObject {
 
         if (this.pos.y >= 0) {
             // y pos and close to stop
-            if (this.stopHeight - this.height < this.pos.y) {
+            if (this.stopHeight - (this.height / 2.0 - 80) < this.pos.y) {
+                this.stoppingChanged = false
+
+                if (!this.stopping) {
+                    this.stoppingChanged = true
+                }
+
+                this.stopping = true
+
+                if (this.stoppingChanged) {
+                    this.scrollHeight = 0
+                }
+
+                if (this.scrollHeight > this.stoppingHeight) {
+                    this.scrollHeight = this.stoppingHeight
+                }
+
                 console.log('stopping')
                 console.log(`stoppingHeight: ${this.stoppingHeight}`)
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
@@ -96,6 +114,9 @@ class Background extends MovingObject {
                 Util.drawCircle(ctx, "green", {x: 0, y: 0})
                 Util.drawCircle(ctx, "red", {x: 0, y: this.stoppingHeight})
                 Util.drawCircle(ctx, "blue", {x: 0, y: this.scrollHeight})
+
+
+
             } else {
                 console.log('going')
 
