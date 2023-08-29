@@ -11,15 +11,15 @@ class Background extends MovingObject {
         this.bgroundImg = document.getElementById("bground");
         this.height = window.innerHeight;
         this.width = window.innerWidth;
-        this.scrollHeight = 0;
+        this.scrollHeight = 0
         // this.yRepeatCount = 0
         // this.maxYRepeats = 4
         this.stoppingHeight = window.innerHeight/2.0 - 80
         this.stopHeight = window.innerHeight * 4
         // this.stopHeight = Game.HEIGHT
         // this.stopWidth = Game.WIDTH
-        this.stopping = false
-        this.stoppingChanged = false
+        this.stopping = {up: false, down: false, right: false, left: false}
+        this.stoppingChanged = {up: false, down: false, right: false, left: false}
     }
 
     moveUp () {
@@ -39,7 +39,7 @@ class Background extends MovingObject {
 
     moveDown() {
         // alert('moveDown')
-        let newScrollHeight = (this.scrollHeight + this.vel.y) % this.height
+        let newScrollHeight = (this.scrollHeight + this.vel.y) % (-1 * this.height)
         if (this.pos.y > -1 * this.stopHeight || newScrollHeight >= -1 * this.stoppingHeight) {
             this.scrollHeight += this.vel.y
             // this.yRepeatCount -= Math.ceil(this.scrollHeight / this.height)
@@ -91,15 +91,15 @@ class Background extends MovingObject {
         if (this.pos.y >= 0) {
             // y pos and close to stop
             if (this.stopHeight - (this.height / 2.0 - 80) < this.pos.y) {
-                this.stoppingChanged = false
+                this.stoppingChanged.up = false
 
-                if (!this.stopping) {
-                    this.stoppingChanged = true
+                if (!this.stopping.up) {
+                    this.stoppingChanged.up = true
                 }
 
-                this.stopping = true
+                this.stopping.up = true
 
-                if (this.stoppingChanged) {
+                if (this.stoppingChanged.up) {
                     this.scrollHeight = 0
                 }
 
