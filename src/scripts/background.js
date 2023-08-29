@@ -61,7 +61,7 @@ class Background extends MovingObject {
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         console.log(`vel: ${this.vel.y}`)
         console.log(`scrollHeight: ${this.scrollHeight}`)
-        console.log(`yRepeats: ${this.yRepeatCount}`)
+        console.log(`stoppingUp: ${this.stopping.up}`)
 
 
         if (this.pos.y > this.stopHeight) {
@@ -119,6 +119,13 @@ class Background extends MovingObject {
 
             } else {
                 console.log('going')
+                this.stoppingChanged.up = false
+
+                if (this.stopping.up) {
+                    this.stoppingChanged.up = true
+                } 
+
+                this.stopping.up = false
 
                 // Bottom of screen = top of Image
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scrollHeight, 0, this.scrollHeight, this.width, this.height - this.scrollHeight)
