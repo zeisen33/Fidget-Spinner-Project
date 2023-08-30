@@ -1,6 +1,7 @@
 const MovingObject = require ("./moving_object")
 const Game = require("./game")
 const Util = require("./util")
+const Spinner = require("./spinner")
 
 class Background extends MovingObject {
     static DIM_X = window.innerWidth * 4
@@ -8,7 +9,7 @@ class Background extends MovingObject {
     
     constructor (options) {
         // Why can't I use Game.DIM_X or Game.DIM_Y here?
-        console.log(`innerHeight: ${window.innerHeight}`)
+        // console.log(`innerHeight: ${window.innerHeight}`)
         super(options)
         // console.log(Background.DIM_X)
         // console.log(Game.WIDTH)
@@ -20,7 +21,8 @@ class Background extends MovingObject {
         this.height = window.innerHeight;
         this.width = window.innerWidth;
         this.pos = {x: Background.DIM_X / 2, y: Background.DIM_Y / 2}
-        this.scroll = {x: this.pos.x % this.width, y: this.height / 2}
+        this.scroll = {x: this.pos.x % this.width, y: this.height / 2 - Spinner.SPINNER_SIZE / 2}
+        this.stopY = this.height / 2 - Spinner.SPINNER_SIZE / 2
     }
 
 
@@ -49,6 +51,8 @@ class Background extends MovingObject {
         
         this.pos.y += this.vel.y
         this.scroll.y += this.vel.y
+
+        // Scroll height in [0, innerHeight)
         if (this.scroll.y < 0) {
             this.scroll.y = this.height + this.scroll.y
         } else {
@@ -70,12 +74,44 @@ class Background extends MovingObject {
         // console.log(`scroll: ${JSON.stringify(this.scroll)}`)
         
 
-
-        // Bottom of screen = top of Image
-        ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scroll.y, 0, this.scroll.y, this.width, this.height - this.scroll.y)
+        // clearRect(0, 0, this.width, this.height)
         
-        // Top of screen = bottom of image
-        ctx.drawImage(this.bgroundImg, 0, this.height - this.scroll.y, this.width, this.scroll.y, 0, 0, this.width, this.scroll.y)
+        // if (this.height / 2 < Background.HEIGHT - this.pos.y)
+        
+
+        
+        ctx.clearRect(0, 0, Background.DIM_X, Background.DIM_Y)
+       
+        
+
+        // if approaching top
+        if (this.pos.y >= Background.DIM_Y - this.stopY) {
+            // clip from scrollY to innerHeight and put it scrollY
+            ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y, this.width, this.height)
+
+            if (this.pos.y === Background.DIM_Y) {
+                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.stopY, this.width, this.height)
+            }
+        }
+        else {
+            
+            
+            // Bottom of screen = top of Image
+            ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scroll.y, 0, this.scroll.y, this.width, this.height - this.scroll.y)
+            
+            // Top of screen = bottom of image
+            ctx.drawImage(this.bgroundImg, 0, this.height - this.scroll.y, this.width, this.scroll.y, 0, 0, this.width, this.scroll.y)
+            
+                    }
+            
+            
+
+
+        
+        Util.drawCircle(ctx, "yellow", {x: 0, y: 0})
+        Util.drawCircle(ctx, "blue", {x: 0, y: this.scroll.y})
+        Util.drawCircle(ctx, "green", {x: 0, y: window.innerHeight / 2 - 75})
+        Util.drawCircle(ctx, "red:", {x: 0, y: Background.DIM_Y})
     }
 }
 
