@@ -1,4 +1,10 @@
+const Game = require('./game')
+
+
 class MovingObject {
+    static WIDTH = innerWidth * 4
+    static HEIGHT = innerHeight * 4
+
     constructor(options) {
         this.vel = options.vel || {x: 0, y: 0}
         this.game = options.game
@@ -20,6 +26,34 @@ class MovingObject {
 
     remove(object) {
         this.game.remove(this)
+    }
+
+    isOobRight(pos) {
+        return pos.x > Game.WIDTH
+    }
+
+    isOobLeft(pos) {
+        return pos.x < 0
+    }
+
+    isOobUp(pos) {
+        return pos.y < 0
+    }
+
+    isOobDown(pos) {
+        return pos.y > Game.HEIGHT
+    }
+
+    isOobX(pos) {
+        return this.isOobRight(pos) || this.isOobLeft(pos)
+    }
+
+    isOobY(pos) {
+        return this.isOobUp(pos) || this.isOobDown(pos)
+    }
+
+    isOob(pos) {
+        return this.isOobX(pos) || this.isOobY(pos)
     }
 }
 

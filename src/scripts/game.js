@@ -6,17 +6,24 @@ const Spinner = require("./spinner.js")
 const Background = require("./background.js")
 
 class Game {
-    static WIDTH = 4000
-    static HEIGHT = 4 * window.innerHeight
+    static WIDTH = window.innerWidth * 4
+    static HEIGHT = window.innerHeight * 4
 
     constructor() {
         this.spinners = []
         this.targets = []
         this.bullets = []
-        this.background = new Background({pos: {x: 0, y: 0}, game: this})
+        this.background = new Background({game: this})
 
         this.addTarget()
     }
+
+    // getGameWidth() {
+    //     return Game.WIDTH
+    // }
+    // getGameHeight() {
+    //     return Game.HEIGHT
+    // }
 
     add(object) {
         if (object instanceof Target) {
@@ -55,6 +62,7 @@ class Game {
     }
 
     moveObjects(delta) {
+        // console.log(this.allObjects())
         this.allObjects().forEach(object => object.move(delta))
     }
 
@@ -96,19 +104,6 @@ class Game {
 
     right() {
         this.background.x -= 1
-    }
-
-
-    isXoutOfBounds(pos) {
-        return pos.x > Game.WIDTH || pos.x < -1 * Game.WIDTH
-    }
-
-    isYoutOfBounds(pos) {
-        return pos.y > Game.HEIGHT || pos.y < -1 * Game.HEIGHT
-    }
-
-    isOutOfBounds(pos) {
-        return this.isXoutOfBounds(pos) || this.isYoutOfBounds(pos)
     }
 }
 

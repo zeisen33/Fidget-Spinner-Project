@@ -2,21 +2,24 @@ const MovingObject = require("./moving_object")
 const Util = require("./util")
 const Bullet = require("./bullet")
 
-class Spinner extends MovingObject {
+class Spinner {
     static SPINNER_SIZE = 150
     static MIN_ANG_SPD = 5.0
 
-    constructor(options){
+    constructor(options) { 
         const innerHeight = window.innerHeight
         const innerWidth = window.innerWidth
 
-        super(options)
+        this.game = options.game
+        this.vel = {x: 0, y: 0}
+        this.hiddenVel = this.game.background.vel
+        this.ctx = this.game.ctx
         // console.log(this.game.background.vel)
-        this.pos = {x: innerWidth/2.0 - Spinner.SPINNER_SIZE/2.0, y: innerHeight/2.0 - Spinner.SPINNER_SIZE/2.0}
+        this.drawingPos = {x: innerWidth/2.0 - Spinner.SPINNER_SIZE/2.0, y: innerHeight/2.0 - Spinner.SPINNER_SIZE/2.0}
+        this.hiddenPos = {x: innerWidth/2.0 - Spinner.SPINNER_SIZE/2.0 + this.game.background.pos.x, y: innerHeight/2.0 - Spinner.SPINNER_SIZE/2.0 + this.game.background.pos.y}        
         this.rads = 0
         this.center = {x: innerWidth/2.0, y: innerHeight/2.0}
         this.angularSpd = Spinner.MIN_ANG_SPD
-        this.hiddenVel = this.game.background.vel
     
     }
 
@@ -28,9 +31,20 @@ class Spinner extends MovingObject {
         ctx.translate(-1.0 * this.center.x, -1.0 * this.center.y)
 
         const spinnerImg = document.getElementById("spinnerImg")
-        ctx.drawImage(spinnerImg, this.pos.x, this.pos.y, Spinner.SPINNER_SIZE, Spinner.SPINNER_SIZE)
+        ctx.drawImage(spinnerImg, this.drawingPos.x, this.drawingPos.y, Spinner.SPINNER_SIZE, Spinner.SPINNER_SIZE)
         
         ctx.restore()
+    }
+
+    move(delta) {
+        delta = delta || 1
+        // console.log(`object: ${this}`)
+        // console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
+        // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
+        this.hiddenPos.x += this.hiddenVel.x * delta / 40;
+        this.hiddenPos.y += this.hiddenVel.y * delta / 40;
+
+        // const pos = this.pos           
     }
 
     fireBullet() {
@@ -47,7 +61,7 @@ class Spinner extends MovingObject {
 
         const bullet = new Bullet({
             vel: bulletVel,
-            pos: this.pos,
+            pos: this.drawingPos,
             game: this.game
         })
 
