@@ -35,12 +35,12 @@ class Background extends MovingObject {
             console.log(`oobUp`)
             this.pos.y = Background.DIM_Y
             this.vel.y = 0
-            this.scroll.y = 0
+            this.scroll.y = 410
         } else if (this.isOobDown(this.pos)) {
             console.log('oobDown')
             this.pos.y = 0
             this.vel.y = 0
-            this.scroll.y = 0
+            this.scroll.y = 410
         } else if (this.isOobLeft(this.pos)) {
             this.pos.x = 0
             this.vel.x = 0
