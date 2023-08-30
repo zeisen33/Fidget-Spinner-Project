@@ -3,14 +3,14 @@ const Game = require("./game")
 const Util = require("./util")
 
 class Background extends MovingObject {
-    static WIDTH = window.innerWidth * 4
-    static HEIGHT = window.innerHeight * 4
+    static DIM_X = window.innerWidth * 4
+    static DIM_Y = window.innerHeight * 4
     
     constructor (options) {
-        // Why can't I use Game.WIDTH or Game.HEIGHT here?
+        // Why can't I use Game.DIM_X or Game.DIM_Y here?
 
         super(options)
-        console.log(Background.WIDTH)
+        // console.log(Background.DIM_X)
         // console.log(Game.WIDTH)
         // console.log(this.game)
         // console.log(this.game.width)
@@ -19,14 +19,15 @@ class Background extends MovingObject {
         this.bgroundImg = document.getElementById("bground");
         this.height = window.innerHeight;
         this.width = window.innerWidth;
-        this.pos = {x: Background.WIDTH / 2, y: Background.HEIGHT / 2}
-        this.scroll = {x: this.pos.x % Background.WIDTH, y: this.pos.y % Background.HEIGHT}
+        this.pos = {x: Background.DIM_X / 2, y: Background.DIM_Y / 2}
+        this.scroll = {x: this.pos.x % this.width, y: this.pos.y % this.height}
         console.log(this.pos)
         console.log(this.scroll)
     }
 
     moveUp () {
-    
+        console.log('moving up')
+        this.pos.y += this.vel.y
     }
 
     moveDown() {
