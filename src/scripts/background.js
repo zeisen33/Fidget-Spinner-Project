@@ -25,20 +25,39 @@ class Background extends MovingObject {
         console.log(this.scroll)
     }
 
-    moveUp () {
-        console.log('moving up')
+
+    // Overwrites movingObject.move
+    move() {
         this.pos.y += this.vel.y
-    }
+        this.scroll.y += this.vel.y
+        this.pos.x += this.vel.x
+        this.scroll.x += this.scroll.x
+    
 
-    moveDown() {
-        
-    }
+        // Can't move Out of Bounds (Oob)
+        if (this.isOobUp(this.pos)) {
+            console.log(`oobUp`)
+            this.pos.y = Background.DIM_Y
+            this.vel.y = 0
+        } else if (this.isOobDown(this.pos)) {
+            console.log('oobDown')
+            this.pos.y = 0
+            this.vel.y = 0
+        } else if (this.isOobLeft(this.pos)) {
+            this.pos.x = 80
+            this.vel.x = 0
+        } else if (this.isOobRight(this.pos)) {
+            this.pos.x = Background.DIM_X - 80
+            this.vel.x = 0
+        }
 
-    // draw(ctx) {
-    //     ctx.drawImage(this.bgroundImg, this.pos.x, this.pos.y)
-    // }
+
+    }
 
     draw (ctx) {
+        console.log(`pos: ${JSON.stringify(this.pos)}`)
+        console.log(`vel: ${JSON.stringify(this.vel)}`)
+        this.move()
         // console.log(`pos: ${JSON.stringify(this.pos.x)}`)
         // console.log(`scroll: ${JSON.stringify(this.scroll)}`)
         // Bottom of screen = top of Image

@@ -28,7 +28,7 @@ class MovingObject {
     }
 
     isOobRight(pos) {
-        return pos.x > Game.WIDTH
+        return pos.x > MovingObject.WIDTH
     }
 
     isOobLeft(pos) {
@@ -36,11 +36,12 @@ class MovingObject {
     }
 
     isOobUp(pos) {
-        return pos.y < 0
+        // console.log(MovingObject.HEIGHT)
+        return pos.y > MovingObject.HEIGHT
     }
 
     isOobDown(pos) {
-        return pos.y > Game.HEIGHT
+        return pos.y < 0
     }
 
     isOobX(pos) {
