@@ -86,12 +86,14 @@ class Background extends MovingObject {
 
         // if approaching top
         if (this.pos.y >= Background.DIM_Y - this.stopY) {
-            // clip from scrollY to innerHeight and put it scrollY
-            ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y, this.width, this.height)
-
+            // Handle if scrollY = 0, which happens when scrollY reaches exactly stopY
             if (this.pos.y === Background.DIM_Y) {
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.stopY, this.width, this.height)
-            }
+            } else {
+                // clip from scrollY to innerHeight and put it scrollY
+                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y, this.width, this.height)
+            }   
+
         }
         else {
             
