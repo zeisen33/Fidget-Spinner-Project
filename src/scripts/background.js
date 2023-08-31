@@ -43,13 +43,15 @@ class Background extends MovingObject {
             this.vel.y = 0
             this.scroll.y = 410 + 150
         } else if (this.isOobLeft(this.pos)) {
+            console.log('oobLeft')
             this.pos.x = 0
             this.vel.x = 0
-            // this.scroll.x = 
+            this.scroll.x = 257.5 
         } else if (this.isOobRight(this.pos)) {
+            console.log('oobRight')
             this.pos.x = Background.DIM_X
             this.vel.x = 0
-            // this.scroll.x = 
+            this.scroll.x = 257.5
         }
         
         this.pos.y += this.vel.y
@@ -80,6 +82,22 @@ class Background extends MovingObject {
         
         ctx.clearRect(0, 0, Background.DIM_X, Background.DIM_Y)
        
+        // Cases:
+        // Approaching top: Not left or right,
+        //                  And Left,
+        //                  And Right,
+        // Approaching bottom: Not left or right,
+        //                  And left,
+        //                  And right,
+        // Not top or bottom: Left,
+        //                    Right,
+        // Not approaching
+
+
+
+
+
+
         // if approaching top
         // 3880 - 410 = 3470
         if (this.pos.y >= Background.DIM_Y - this.stopY) {
@@ -97,6 +115,7 @@ class Background extends MovingObject {
             // 3rd param if < 0 white space in middle, if > 0 shifts at 560
             ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y - this.height, this.width, this.height)
         } else {  
+            // Working for y movement 
             // Bottom of screen = top of Image
             ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height - this.scroll.y, 0, this.scroll.y, this.width, this.height - this.scroll.y)
             

@@ -99,11 +99,11 @@ class Game {
     }
 
     left() {
-        this.background.x += 1
+        this.background.vel.x += 1
     }
 
     right() {
-        this.background.x -= 1
+        this.background.vel.x -= 1
     }
 }
 
