@@ -23,6 +23,7 @@ class Background extends MovingObject {
         this.pos = {x: Background.DIM_X / 2, y: Background.DIM_Y / 2}
         this.scroll = {x: this.pos.x % this.width, y: this.height / 2 - Spinner.SPINNER_SIZE / 2}
         this.stopY = this.height / 2 - Spinner.SPINNER_SIZE / 2
+        this.stopYDown = this.height / 2 + Spinner.SPINNER_SIZE / 2
     }
 
 
@@ -38,9 +39,9 @@ class Background extends MovingObject {
             this.scroll.y = 410
         } else if (this.isOobDown(this.pos)) {
             console.log('oobDown')
-            this.pos.y = 0
+            this.pos.y = 150
             this.vel.y = 0
-            this.scroll.y = 410
+            this.scroll.y = 410 + 150
         } else if (this.isOobLeft(this.pos)) {
             this.pos.x = 0
             this.vel.x = 0
@@ -85,15 +86,30 @@ class Background extends MovingObject {
         
 
         // if approaching top
+        // 3880 - 410 = 3470
         if (this.pos.y >= Background.DIM_Y - this.stopY) {
+            console.log(this.stopY)
+            console.log(Background.DIM_Y - this.stopY)
             // Handle if scrollY = 0, which happens when scrollY reaches exactly stopY
-            if (this.pos.y === Background.DIM_Y) {
-                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.stopY, this.width, this.height)
-            } else {
+            // if (this.pos.y === Background.DIM_Y) {
+            //     ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.stopY, this.width, this.height)
+            // } else {
                 // clip from scrollY to innerHeight and put it scrollY
                 ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y, this.width, this.height)
-            }   
+            // }   
 
+        }
+
+                // If approaching bottom
+        else if (this.pos.y < 560) {
+            console.log(this.stopYDown)
+            // if (this.pos.y === 0) {
+            //     ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, 0, this.width, this.stopYDown)
+            // } else {
+
+                // 3rd param if < 0 white space in middle, if > 0 shifts at 560
+                ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y - this.height, this.width, this.height)
+            // }
         }
         else {
             
