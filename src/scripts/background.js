@@ -1,3 +1,5 @@
+// use createPattern() or make bgroundImg a canvas and drawImg(bgroundImg.translate(xvel, yvel))
+
 const MovingObject = require ("./moving_object")
 const Game = require("./game")
 const Util = require("./util")
