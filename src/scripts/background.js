@@ -82,14 +82,16 @@ class Background extends MovingObject {
             // then clear from bottom of screen + scroll to stopping point
             // clearRect(x, y, width, height) with x,y = topLeft
             ctx.clearRect(0, this.stop.down + this.pos.y, this.width, this.height)
-        } else if (this.pos.x > Background.DIM_X - this.stop.right) {
+        }
+
+        // Separately, if pos approaching right/left
+        if (this.pos.x > Background.DIM_X - this.stop.right) {
             ctx.clearRect(0, 0, this.stop.right - (Background.DIM_X - this.pos.x), this.height)
         } else if (this.pos.x < this.stop.left) {                        
             ctx.clearRect(this.stop.left + this.pos.x, 0, this.width, this.height)
         }        
-                    
-        Util.drawCircle(ctx, "yellow", Background.DIM_Y)
     }
+    
 }
 
 module.exports = Background
