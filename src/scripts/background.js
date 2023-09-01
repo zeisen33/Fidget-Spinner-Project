@@ -8,8 +8,7 @@ const Spinner = require("./spinner")
 class Background extends MovingObject {
     static DIM_X = window.innerWidth * 4
     static DIM_Y = window.innerHeight * 4
-    
-    
+
     constructor (options) {
         // Why can't I use Game.DIM_X or Game.DIM_Y here?
         // console.log(`innerHeight: ${window.innerHeight}`)

@@ -9,6 +9,7 @@ class Game {
     static DIM_X = window.innerWidth * 4
     static DIM_Y = window.innerHeight * 4
 
+    
     constructor() {
         this.spinners = []
         this.targets = []
