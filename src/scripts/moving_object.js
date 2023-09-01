@@ -41,7 +41,7 @@ class MovingObject {
     }
 
     isOobDown(pos) {
-        return pos.y < 150
+        return pos.y < 0
     }
 
     isOobX(pos) {

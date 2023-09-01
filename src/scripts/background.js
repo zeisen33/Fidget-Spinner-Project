@@ -23,12 +23,12 @@ class Background extends MovingObject {
         this.height = window.innerHeight;
         this.width = window.innerWidth;
         this.pos = {x: Background.DIM_X / 2, y: Background.DIM_Y / 2}
-        this.stop = {   right: this.width / 2 + Spinner.SPINNER_SIZE / 2,
-                        left: this.width / 2 - Spinner.SPINNER_SIZE / 2,
+        this.stop = {   right: this.width / 2 - Spinner.SPINNER_SIZE / 2,
+                        left: this.width / 2 + Spinner.SPINNER_SIZE / 2,
                         up: this.height / 2 - Spinner.SPINNER_SIZE / 2,
-                        down: this.height / 2 - Spinner.SPINNER_SIZE / 2
+                        down: this.height / 2 + Spinner.SPINNER_SIZE / 2
                     }
-                    console.log(Background.DIM_Y)
+        // console.log(Background.DIM_Y)
     }
 
 
@@ -42,7 +42,7 @@ class Background extends MovingObject {
             this.vel.y = 0
         } else if (this.isOobDown(this.pos)) {
             console.log('oobDown')
-            this.pos.y = 150
+            this.pos.y = 0
             this.vel.y = 0
         } else if (this.isOobLeft(this.pos)) {
             console.log('oobLeft')
@@ -68,23 +68,24 @@ class Background extends MovingObject {
         const pattern = ctx.createPattern(this.bgroundImg, "repeat")
         ctx.fillStyle = pattern
         ctx.save()
-
         ctx.translate(this.pos.x, this.pos.y)
         ctx.fillRect(-this.pos.x, -this.pos.y, Background.DIM_X, Background.DIM_Y)
-        
         ctx.restore()
-        
-        ctx.fillStyle = "yellow"
-        // if pos approaching top
-        if (this.pos.y >= Background.DIM_Y - this.stop.up) {
-            ctx.clearRect(0, 0, this.width, this.stop.up - (Background.DIM_Y - this.pos.y))
-            // } else if (this.pos.y < this.stop.down) {
                 
-                // } else if (this.pos.x > Background.DIM_X - this.stop.right) {
-                    
-                    // } else if (this.pos.x < this.stop.left) {
-                        
-                        
+        // if pos approaching top
+        if (this.pos.y > Background.DIM_Y - this.stop.up) {
+            // then clear from top of screen to stopping point - scroll (maxY - posY)
+            ctx.clearRect(0, 0, this.width, this.stop.up - (Background.DIM_Y - this.pos.y))
+          
+          // if pos approaching bottom
+        } else if (this.pos.y < this.stop.down) {
+            // then clear from bottom of screen + scroll to stopping point
+            // clearRect(x, y, width, height) with x,y = topLeft
+            ctx.clearRect(0, this.stop.down + this.pos.y, this.width, this.height)
+        } else if (this.pos.x > Background.DIM_X - this.stop.right) {
+            ctx.clearRect(0, 0, this.stop.right - (Background.DIM_X - this.pos.x), this.height)
+        } else if (this.pos.x < this.stop.left) {                        
+            ctx.clearRect(this.stop.left + this.pos.x, 0, this.width, this.height)
         }        
                     
         Util.drawCircle(ctx, "yellow", Background.DIM_Y)
