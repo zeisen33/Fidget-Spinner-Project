@@ -28,6 +28,7 @@ class Background extends MovingObject {
                         up: this.height / 2 - Spinner.SPINNER_SIZE / 2,
                         down: this.height / 2 - Spinner.SPINNER_SIZE / 2
                     }
+                    console.log(Background.DIM_Y)
     }
 
 
@@ -58,7 +59,7 @@ class Background extends MovingObject {
     }
 
     draw (ctx) {
-        console.log(`pos: ${JSON.stringify(this.pos)}`)
+        console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         // console.log(`vel: ${JSON.stringify(this.vel)}`)
         this.move()
         
@@ -67,12 +68,26 @@ class Background extends MovingObject {
         const pattern = ctx.createPattern(this.bgroundImg, "repeat")
         ctx.fillStyle = pattern
         ctx.save()
+
         ctx.translate(this.pos.x, this.pos.y)
         ctx.fillRect(-this.pos.x, -this.pos.y, Background.DIM_X, Background.DIM_Y)
+        
         ctx.restore()
         
-
-        
+        ctx.fillStyle = "yellow"
+        // if pos approaching top
+        if (this.pos.y >= Background.DIM_Y - this.stop.up) {
+            ctx.clearRect(0, 0, this.width, this.stop.up - (Background.DIM_Y - this.pos.y))
+            // } else if (this.pos.y < this.stop.down) {
+                
+                // } else if (this.pos.x > Background.DIM_X - this.stop.right) {
+                    
+                    // } else if (this.pos.x < this.stop.left) {
+                        
+                        
+        }        
+                    
+        Util.drawCircle(ctx, "yellow", Background.DIM_Y)
     }
 }
 
