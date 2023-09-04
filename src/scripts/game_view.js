@@ -8,9 +8,11 @@ class GameView {
     }
 
     start() {
+
         this.bindKeyHandlers()
         this.lastTime = 0
         requestAnimationFrame(this.animate.bind(this))
+        
     }
 
     bindKeyHandlers() {

@@ -55,9 +55,10 @@ class Background extends MovingObject {
         this.pos.y += this.vel.y
         this.pos.x += this.vel.x
     }
-    
+
 
     draw (ctx) {
+        
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         // console.log(`vel: ${JSON.stringify(this.vel)}`)
         this.move()
