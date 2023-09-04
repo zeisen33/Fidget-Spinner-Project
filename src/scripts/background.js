@@ -31,7 +31,6 @@ class Background extends MovingObject {
         // console.log(Background.DIM_Y)
     }
 
-
     // Overwrites movingObject.move
     move() {
         // Can't move Out of Bounds (Oob)
@@ -53,10 +52,10 @@ class Background extends MovingObject {
             this.vel.x = 0
         }
         
-        
         this.pos.y += this.vel.y
         this.pos.x += this.vel.x
     }
+    
 
     draw (ctx) {
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
