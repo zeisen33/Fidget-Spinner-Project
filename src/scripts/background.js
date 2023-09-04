@@ -34,7 +34,6 @@ class Background extends MovingObject {
 
     // Overwrites movingObject.move
     move() {
-        
         // Can't move Out of Bounds (Oob)
         if (this.isOobUp(this.pos)) {
             console.log(`oobUp`)
@@ -53,6 +52,7 @@ class Background extends MovingObject {
             this.pos.x = Background.DIM_X
             this.vel.x = 0
         }
+        
         
         this.pos.y += this.vel.y
         this.pos.x += this.vel.x
