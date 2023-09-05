@@ -17,7 +17,6 @@ class Game {
         this.background = new Background({game: this})
 
         this.addTarget()
-        
     }
 
     // getGameWidth() {
@@ -27,6 +26,7 @@ class Game {
     //     return Game.HEIGHT
     // }
 
+    
     add(object) {
         if (object instanceof Target) {
             this.targets.push(object)
