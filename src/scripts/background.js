@@ -31,7 +31,7 @@ class Background extends MovingObject {
                     }
         // console.log(Background.DIM_Y)
     }
-    
+
 
     // Overwrites movingObject.move
     move() {
@@ -60,7 +60,6 @@ class Background extends MovingObject {
 
 
     draw (ctx) {
-
         console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         // console.log(`vel: ${JSON.stringify(this.vel)}`)
         this.move()

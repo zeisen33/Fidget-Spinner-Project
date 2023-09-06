@@ -1,6 +1,7 @@
 
 
 class GameView {
+    
     constructor(game, ctx) {
         this.game = game
         this.ctx = ctx
@@ -8,11 +9,9 @@ class GameView {
     }
 
     start() {
-
         this.bindKeyHandlers()
         this.lastTime = 0
         requestAnimationFrame(this.animate.bind(this))
-        
     }
 
     bindKeyHandlers() {
