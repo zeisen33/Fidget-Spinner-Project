@@ -58,12 +58,25 @@ class Spinner {
             ctx.stroke()
 
         }
-        if (this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY || this.rads > -1 * Spinner.SPINNER_SIZE) {
+
+
+        // Possible speed so high that upcoming conditional doesn't hit
+
+        // if it's past D but not yet at W
+        if (this.rads < -4/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI + Spinner.SPIN_LENIENCY) {
+            // and if it hasn't been checked yet
             if (this.reset === false) {
-                alert('checking time')
+                // then check
+                if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
+                    console.log('spin speed up!')
+                } else {
+                    console.log('spin speed down.')
+                }
+                
+                this.spinChecks['W'] = 'not passed'
+                this.spinChecks['A'] = 'not passed'
+                this.spinChecks['D'] = 'not passed'
                 this.reset = true
-            } else {
-                this.reset = false
             }
             //     if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
         //         console.log('all passed')
@@ -73,6 +86,8 @@ class Spinner {
         //         this.spinChecks['A'] = 'not passed'
         //         this.spinChecks['D'] = 'not passed'
         //     }
+        } else {
+            this.reset = false
         }
         // Hardcode positions and offsets
         drawBGcircle(this.center.x, this.center.y - 45, ctx, checkColor('W'), -9, 8, 'W')
