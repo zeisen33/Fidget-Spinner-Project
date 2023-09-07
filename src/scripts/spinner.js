@@ -114,12 +114,26 @@ class Spinner {
         // this.angularSpd += 1
     }
     a() {
-
+        const checkA = () => {
+            if ((this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
+                return true
+            } else {
+                return false
+            }
+        }
+        console.log(checkA())
     }
     d() {
-
+        const checkD = () => {   
+            if ((this.rads < -4/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
+                return true
+            } else {
+                return false
+            }
+        }
+        console.log(checkD())
     }
 }
-
+    
 module.exports = Spinner
   
