@@ -30,19 +30,23 @@ export const dir = (vec) => {
     return scale(vec, 1 / normed)
 }
 
-export const drawCircle = (ctx, color, pos) => {
+export const drawCircle = (ctx, color, pos, rad) => {
     // console.log(color)
     // console.log(`ctx: ${ctx}`)
-    ctx.fillStyle = color
+    ctx.fillStyle = 'white'
+
     ctx.beginPath()
 
     ctx.arc(
         pos.x,
         pos.y,
-        10,
+        rad,
         2 * Math.PI,
         false
     )
 
-    ctx.fill()
+    // ctx.font = '20px Arial'
+    // ctx.fillText('W', pos.x - 9, pos.y + 8)
+    // ctx.strokeStyle = 'white'
+    // ctx.stroke()
 }

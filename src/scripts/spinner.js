@@ -24,6 +24,34 @@ class Spinner {
     }
 
     draw(ctx) {
+        
+        // draw background circles first
+        const drawBGcircle = (x, y, ctx, color, xOff, yOff, txt) => {
+            ctx.fillStyle = color
+
+            ctx.beginPath()
+
+            ctx.arc(
+            x,
+            y,
+            22,
+            2 * Math.PI,
+            false
+            ) 
+
+            ctx.font = '20px Arial'
+            ctx.fillText(txt, x + xOff, y + yOff)
+            ctx.strokeStyle = color
+            ctx.stroke()
+
+        }
+        // Hardcode positions and offsets
+        drawBGcircle(this.center.x, this.center.y - 45, ctx, 'white', -9, 8, 'W')
+        drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, 'white', -6, 6, 'A')
+        drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, 'white', -6, 6, 'D')
+
+
+        console.log(`angularSpd: ${this.angularSpd}`)
         ctx.save()
         ctx.translate(this.center.x, this.center.y)
         ctx.rotate(this.rads + Math.PI/64.0)
@@ -32,6 +60,7 @@ class Spinner {
 
         const spinnerImg = document.getElementById("spinnerImg")
         ctx.drawImage(spinnerImg, this.drawingPos.x, this.drawingPos.y, Spinner.SPINNER_SIZE, Spinner.SPINNER_SIZE)
+        
         
         ctx.restore()
     }
@@ -70,13 +99,13 @@ class Spinner {
     }
 
     w() {
-
+        this.angularSpd += 1
     }
     a() {
 
     }
     d() {
-        
+
     }
 }
 
