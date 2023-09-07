@@ -21,11 +21,23 @@ class Spinner {
         this.rads = 0
         this.center = {x: innerWidth/2.0, y: innerHeight/2.0}
         this.angularSpd = Spinner.MIN_ANG_SPD
+        this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
+        this.reset = false
     
     }
 
     draw(ctx) {
-        
+        const checkColor = (spinLetter) => {
+            // console.log(this.spinChecks[spinLetter])
+            if (this.spinChecks[`${spinLetter}`] === 'not passed') {
+                // console.log('white')
+                return 'white'
+            } else if (this.spinChecks[`${spinLetter}`] === 'failed') {
+                return 'red'
+            } else if (this.spinChecks[`${spinLetter}`] === 'passed') {
+                return 'green'
+            }
+        } 
         // draw background circles first
         const drawBGcircle = (x, y, ctx, color, xOff, yOff, txt) => {
             ctx.fillStyle = color
@@ -46,10 +58,26 @@ class Spinner {
             ctx.stroke()
 
         }
+        if (this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY || this.rads > -1 * Spinner.SPINNER_SIZE) {
+            if (this.reset === false) {
+                alert('checking time')
+                this.reset = true
+            } else {
+                this.reset = false
+            }
+            //     if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
+        //         console.log('all passed')
+        //         this.angularSpd += 1
+        //     } else {
+        //         this.spinChecks['W'] = 'not passed'
+        //         this.spinChecks['A'] = 'not passed'
+        //         this.spinChecks['D'] = 'not passed'
+        //     }
+        }
         // Hardcode positions and offsets
-        drawBGcircle(this.center.x, this.center.y - 45, ctx, 'white', -9, 8, 'W')
-        drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, 'white', -6, 6, 'A')
-        drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, 'white', -6, 6, 'D')
+        drawBGcircle(this.center.x, this.center.y - 45, ctx, checkColor('W'), -9, 8, 'W')
+        drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, checkColor('A'), -6, 6, 'A')
+        drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, checkColor('D'), -6, 6, 'D')
         
 
         // console.log(`angularSpd: ${this.angularSpd}`)
@@ -65,13 +93,14 @@ class Spinner {
         
         
         ctx.restore()
+
     }
     
     move(delta) {
         delta = delta || 1
         // console.log(`object: ${this}`)
         // console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
-        // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
+        // console.log(`vel: ${{x: this.vel.x, y: thiws.vel.y}}`)
         this.hiddenPos.x += this.hiddenVel.x * delta / 40;
         this.hiddenPos.y += this.hiddenVel.y * delta / 40;
         
@@ -102,36 +131,45 @@ class Spinner {
     }
 
     w() {
-        console.log(`rads: ${this.rads}`)
+        // console.log(`rads: ${this.rads}`)
         const checkW = () => {
             if ((this.rads < -2 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI) || this.rads > -1 * Spinner.SPIN_LENIENCY) {
-                return true
+                this.spinChecks['W'] = 'passed'
+                // return true
             } else {
-                return false
+                this.spinChecks['W'] = 'failed'
+                // return false
             }
         }
-        console.log(checkW())
+        checkW()
+        console.log(this.spinChecks)
         // this.angularSpd += 1
     }
     a() {
         const checkA = () => {
             if ((this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
-                return true
+                this.spinChecks['A'] = 'passed'
+                // return true
             } else {
-                return false
+                this.spinChecks['A'] = 'failed'
+                // return false
             }
         }
-        console.log(checkA())
+        checkA()
+        console.log(this.spinChecks)
     }
     d() {
         const checkD = () => {   
             if ((this.rads < -4/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
+                this.spinChecks['D'] = 'passed'
                 return true
             } else {
-                return false
+                this.spinChecks['D'] = 'failed'
+                // return false
             }
         }
-        console.log(checkD())
+        checkD()
+        console.log(this.spinChecks)
     }
 }
     
