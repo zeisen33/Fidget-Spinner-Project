@@ -1,7 +1,7 @@
 
 
 class GameView {
-    
+
     constructor(game, ctx) {
         this.game = game
         this.ctx = ctx
@@ -23,6 +23,9 @@ class GameView {
         key('down', () => game.down())
         key('left', () => game.left())
         key('right', () => game.right())
+        key('w', () => spinner.w())
+        key('a', () => spinner.a())
+        key('d', () => spinner.d())
     }
 
     animate(currTime) {

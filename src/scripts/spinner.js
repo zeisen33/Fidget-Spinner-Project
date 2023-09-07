@@ -68,6 +68,16 @@ class Spinner {
         // console.log(bullet)
         this.game.add(bullet)
     }
+
+    w() {
+
+    }
+    a() {
+
+    }
+    d() {
+        
+    }
 }
 
 module.exports = Spinner
