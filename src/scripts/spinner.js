@@ -5,6 +5,7 @@ const Bullet = require("./bullet")
 class Spinner {
     static SPINNER_SIZE = 150
     static MIN_ANG_SPD = 5.0
+    static SPIN_LENIENCY = 0.6
 
     constructor(options) { 
         const innerHeight = window.innerHeight
@@ -49,13 +50,14 @@ class Spinner {
         drawBGcircle(this.center.x, this.center.y - 45, ctx, 'white', -9, 8, 'W')
         drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, 'white', -6, 6, 'A')
         drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, 'white', -6, 6, 'D')
+        
 
-
-        console.log(`angularSpd: ${this.angularSpd}`)
+        // console.log(`angularSpd: ${this.angularSpd}`)
         ctx.save()
         ctx.translate(this.center.x, this.center.y)
         ctx.rotate(this.rads + Math.PI/64.0)
         this.rads -= this.angularSpd * Math.PI/640.0
+        this.rads %= 2 * Math.PI
         ctx.translate(-1.0 * this.center.x, -1.0 * this.center.y)
 
         const spinnerImg = document.getElementById("spinnerImg")
@@ -64,7 +66,7 @@ class Spinner {
         
         ctx.restore()
     }
-
+    
     move(delta) {
         delta = delta || 1
         // console.log(`object: ${this}`)
@@ -72,8 +74,9 @@ class Spinner {
         // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
         this.hiddenPos.x += this.hiddenVel.x * delta / 40;
         this.hiddenPos.y += this.hiddenVel.y * delta / 40;
-
+        
         // const pos = this.pos           
+        // console.log(`rads: ${this.rads}`)
     }
 
     fireBullet() {
@@ -99,7 +102,16 @@ class Spinner {
     }
 
     w() {
-        this.angularSpd += 1
+        console.log(`rads: ${this.rads}`)
+        const checkW = () => {
+            if ((this.rads < -2 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI) || this.rads > -1 * Spinner.SPIN_LENIENCY) {
+                return true
+            } else {
+                return false
+            }
+        }
+        console.log(checkW())
+        // this.angularSpd += 1
     }
     a() {
 
