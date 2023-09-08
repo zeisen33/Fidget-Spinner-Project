@@ -69,8 +69,10 @@ class Spinner {
                 // then check
                 if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
                     console.log('spin speed up!')
+                    this.angularSpd += 1
                 } else {
                     console.log('spin speed down.')
+                    this.angularSpd -= 1
                 }
                 
                 this.spinChecks['W'] = 'not passed'
@@ -78,7 +80,7 @@ class Spinner {
                 this.spinChecks['D'] = 'not passed'
                 this.reset = true
             }
-            
+
             //     if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
         //         console.log('all passed')
         //         this.angularSpd += 1
