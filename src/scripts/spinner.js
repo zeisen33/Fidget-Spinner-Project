@@ -64,7 +64,7 @@ class Spinner {
 
         // if it's past D but not yet at W
         if (this.rads < -4/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI + Spinner.SPIN_LENIENCY) {
-            // and if it hasn't been checked yet
+            // and if it hasn't been ch0ecked yet
             if (this.reset === false) {
                 // then check
                 if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
@@ -78,6 +78,7 @@ class Spinner {
                 this.spinChecks['D'] = 'not passed'
                 this.reset = true
             }
+            
             //     if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
         //         console.log('all passed')
         //         this.angularSpd += 1
