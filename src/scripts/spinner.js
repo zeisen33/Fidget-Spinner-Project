@@ -119,7 +119,7 @@ class Spinner {
             this.reset = false
         }
 
-        if (this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY) {
+        if (this.rads < -2/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY) {
             this.text = []
         }
 
