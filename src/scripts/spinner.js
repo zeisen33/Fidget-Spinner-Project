@@ -4,8 +4,10 @@ const Bullet = require("./bullet")
 
 class Spinner {
     static SPINNER_SIZE = 150
-    static MIN_ANG_SPD = 5.0
+    static START_ANG_SPD = 5.0
     static SPIN_LENIENCY = 0.6
+    static MAX_ANG_SPD = 40
+    static MIN_ANG_SPD = 1
 
     constructor(options) { 
         const innerHeight = window.innerHeight
@@ -20,7 +22,7 @@ class Spinner {
         this.hiddenPos = {x: innerWidth/2.0 - Spinner.SPINNER_SIZE/2.0 + this.game.background.pos.x, y: innerHeight/2.0 - Spinner.SPINNER_SIZE/2.0 + this.game.background.pos.y}        
         this.rads = 0
         this.center = {x: innerWidth/2.0, y: innerHeight/2.0}
-        this.angularSpd = Spinner.MIN_ANG_SPD
+        this.angularSpd = Spinner.START_ANG_SPD
         this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
         this.reset = false
         this.text = []
@@ -59,22 +61,28 @@ class Spinner {
 
         }
 
-        // Possible speed so high that upcoming conditional doesn't hit
+        // Possible speed so high that upcoming conditional doesn't hit. Hard code a max spin speed to prevent
 
+        console.log(this.angularSpd)
         // if it's past D but not yet at W
         if (this.rads < -4/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI + Spinner.SPIN_LENIENCY) {
-            // and if it hasn't been ch0ecked yet
+            // and if it hasn't been checked yet
             if (this.reset === false) {
                 // then check
                 if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
                     console.log('spin speed up!')
                     this.angularSpd += 1
+                    // Max spin speed
+                    if (this.angularSpd >= Spinner.MAX_ANG_SPD) {
+                        console.log('max spin speed reached')
+                        this.angularSpd = Spinner.MAX_ANG_SPD
+                    }
                 } else {
                     console.log('spin speed down.')
                     this.angularSpd -= 1
-                    if (this.angularSpd <= 1) {
+                    if (this.angularSpd <= Spinner.MIN_ANG_SPD) {
                         console.log('min spin speed reached')
-                        this.angularSpd = 1
+                        this.angularSpd = Spinner.MIN_ANG_SPD
                     } 
                 }
                 
