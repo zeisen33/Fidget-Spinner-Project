@@ -4,10 +4,10 @@ const Bullet = require("./bullet")
 
 class Spinner {
     static SPINNER_SIZE = 150
-    static START_ANG_SPD = 5.0
+    static START_ANG_SPD = 7.0
     static SPIN_LENIENCY = 0.6
     static MAX_ANG_SPD = 40
-    static MIN_ANG_SPD = 1
+    static MIN_ANG_SPD = 5
 
     constructor(options) { 
         const innerHeight = window.innerHeight
@@ -26,10 +26,24 @@ class Spinner {
         this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
         this.reset = false
         this.text = []
-        
+        this.textColor = null
+    }
+
+    drawText(ctx) {
+        console.log('writing text')
+        console.log(`text: ${this.text[0]}`)
+        console.log(`textLoc: ${this.center.x}, ${this.center.y -150}`)
+        ctx.fillStyle = `${this.textColor}`
+
+        for (let i = 0; i < this.text.length; i++) {
+            ctx.fillText(this.text[i], this.center.x, this.center.y - 150 + i * 20)
+        }
     }
 
     draw(ctx) {
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        
         const checkColor = (spinLetter) => {
             // console.log(this.spinChecks[spinLetter])
             if (this.spinChecks[`${spinLetter}`] === 'not passed') {
@@ -73,17 +87,23 @@ class Spinner {
                 if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
                     console.log('spin speed up!')
                     this.angularSpd += 1
+                    this.text.push('Speed Up!')
+                    this.textColor = 'green'
                     // Max spin speed
                     if (this.angularSpd >= Spinner.MAX_ANG_SPD) {
-                        console.log('max spin speed reached')
                         this.angularSpd = Spinner.MAX_ANG_SPD
+                        this.text.push('Max Speed Reached!')
+                        console.log('max spin speed reached')
                     }
                 } else {
-                    console.log('spin speed down.')
                     this.angularSpd -= 1
+                    this.text.push('Speed Down.')
+                    this.textColor = 'red'
+                    console.log('Spin Speed Down.')
                     if (this.angularSpd <= Spinner.MIN_ANG_SPD) {
-                        console.log('min spin speed reached')
                         this.angularSpd = Spinner.MIN_ANG_SPD
+                        this.text.push('Min Speed Reached.')
+                        console.log('min spin speed reached')
                     } 
                 }
                 
@@ -92,13 +112,16 @@ class Spinner {
                 this.spinChecks['D'] = 'not passed'
                 this.reset = true
             }
+
+            this.drawText(ctx)
+            setTimeout(() => this.text = [], 4000)
         } else {
             this.reset = false
         }
         // Hardcode positions and offsets
-        drawBGcircle(this.center.x, this.center.y - 45, ctx, checkColor('W'), -9, 8, 'W')
-        drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, checkColor('A'), -6, 6, 'A')
-        drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, checkColor('D'), -6, 6, 'D')
+        drawBGcircle(this.center.x, this.center.y - 45, ctx, checkColor('W'), 0, 2, 'W')
+        drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, checkColor('A'), 0, 0, 'A')
+        drawBGcircle(this.center.x + 39, this.center.y + 22, ctx, checkColor('D'), 0, 0, 'D')
         
 
         // console.log(`angularSpd: ${this.angularSpd}`)
