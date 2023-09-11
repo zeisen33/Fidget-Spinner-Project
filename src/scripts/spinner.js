@@ -126,6 +126,7 @@ class Spinner {
         // console.log(`rads: ${this.rads}`)
     }
 
+    
     fireBullet() {
         const norm = Util.norm(this.hiddenVel)
         // console.log(norm)
