@@ -4,7 +4,7 @@ const Bullet = require("./bullet")
 
 class Spinner {
     static SPINNER_SIZE = 150
-    static START_ANG_SPD = 7.0
+    static START_ANG_SPD = 38.0
     static SPIN_LENIENCY = 0.6
     static MAX_ANG_SPD = 40
     static MIN_ANG_SPD = 5
@@ -73,11 +73,14 @@ class Spinner {
             ctx.fillText(txt, x + xOff, y + yOff)
             ctx.strokeStyle = color
             ctx.stroke()
-
+            
         }
-
+        
+        if (this.text.length > 0) {
+            this.drawText(ctx)
+        }
         // Possible speed so high that upcoming conditional doesn't hit. Hard code a max spin speed to prevent
-
+        
         console.log(this.angularSpd)
         // if it's past D but not yet at W
         if (this.rads < -4/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI + Spinner.SPIN_LENIENCY) {
@@ -112,12 +115,14 @@ class Spinner {
                 this.spinChecks['D'] = 'not passed'
                 this.reset = true
             }
-
-            this.drawText(ctx)
-            setTimeout(() => this.text = [], 4000)
         } else {
             this.reset = false
         }
+
+        if (this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY) {
+            this.text = []
+        }
+
         // Hardcode positions and offsets
         drawBGcircle(this.center.x, this.center.y - 45, ctx, checkColor('W'), 0, 2, 'W')
         drawBGcircle(this.center.x - 39, this.center.y + 22, ctx, checkColor('A'), 0, 0, 'A')
@@ -191,6 +196,7 @@ class Spinner {
         console.log(this.spinChecks)
         // this.angularSpd += 1
     }
+    
     a() {
         const checkA = () => {
             if (this.spinChecks['A'] === 'not passed' &&
