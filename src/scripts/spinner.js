@@ -176,7 +176,10 @@ class Spinner {
     w() {
         // console.log(`rads: ${this.rads}`)
         const checkW = () => {
-            if ((this.rads < -2 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI) || this.rads > -1 * Spinner.SPIN_LENIENCY) {
+            if (this.spinChecks['W'] === 'not passed' &&
+                    (this.rads < -2 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI) || 
+                    this.rads > -1 * Spinner.SPIN_LENIENCY) 
+                {
                 this.spinChecks['W'] = 'passed'
                 // return true
             } else {
@@ -190,7 +193,10 @@ class Spinner {
     }
     a() {
         const checkA = () => {
-            if ((this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -2/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
+            if (this.spinChecks['A'] === 'not passed' &&
+                    (this.rads < -2/3 * Math.PI + Spinner.SPIN_LENIENCY && 
+                    this.rads > -2/3 * Math.PI - Spinner.SPIN_LENIENCY)) 
+                {
                 this.spinChecks['A'] = 'passed'
                 // return true
             } else {
@@ -203,7 +209,10 @@ class Spinner {
     }
     d() {
         const checkD = () => {   
-            if ((this.rads < -4/3 * Math.PI + Spinner.SPIN_LENIENCY && this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY)) {
+            if (this.spinChecks['D'] === 'not passed' &&
+                    (this.rads < -4/3 * Math.PI + Spinner.SPIN_LENIENCY && 
+                    this.rads > -4/3 * Math.PI - Spinner.SPIN_LENIENCY)) 
+                {
                 this.spinChecks['D'] = 'passed'
                 return true
             } else {
