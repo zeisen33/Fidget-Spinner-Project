@@ -23,7 +23,7 @@ class Spinner {
         this.angularSpd = Spinner.MIN_ANG_SPD
         this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
         this.reset = false
-    
+        this.text = []
     }
 
     draw(ctx) {
@@ -59,7 +59,6 @@ class Spinner {
 
         }
 
-
         // Possible speed so high that upcoming conditional doesn't hit
 
         // if it's past D but not yet at W
@@ -84,15 +83,6 @@ class Spinner {
                 this.spinChecks['D'] = 'not passed'
                 this.reset = true
             }
-
-            //     if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
-        //         console.log('all passed')
-        //         this.angularSpd += 1
-        //     } else {
-        //         this.spinChecks['W'] = 'not passed'
-        //         this.spinChecks['A'] = 'not passed'
-        //         this.spinChecks['D'] = 'not passed'
-        //     }
         } else {
             this.reset = false
         }
@@ -112,10 +102,8 @@ class Spinner {
 
         const spinnerImg = document.getElementById("spinnerImg")
         ctx.drawImage(spinnerImg, this.drawingPos.x, this.drawingPos.y, Spinner.SPINNER_SIZE, Spinner.SPINNER_SIZE)
-        
-        
+    
         ctx.restore()
-
     }
     
     move(delta) {
