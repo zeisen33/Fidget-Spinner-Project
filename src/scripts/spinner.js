@@ -26,6 +26,7 @@ class Spinner {
         this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
         this.reset = false
         this.text = []
+        
     }
 
     draw(ctx) {
