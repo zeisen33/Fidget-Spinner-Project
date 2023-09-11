@@ -73,6 +73,10 @@ class Spinner {
                 } else {
                     console.log('spin speed down.')
                     this.angularSpd -= 1
+                    if (this.angularSpd <= 1) {
+                        console.log('min spin speed reached')
+                        this.angularSpd = 1
+                    } 
                 }
                 
                 this.spinChecks['W'] = 'not passed'
@@ -126,7 +130,7 @@ class Spinner {
         // console.log(`rads: ${this.rads}`)
     }
 
-    
+
     fireBullet() {
         const norm = Util.norm(this.hiddenVel)
         // console.log(norm)
