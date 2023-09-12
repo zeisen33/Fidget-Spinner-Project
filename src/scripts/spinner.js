@@ -83,7 +83,7 @@ class Spinner {
         }
         // Possible speed so high that upcoming conditional doesn't hit. Hard code a max spin speed to prevent
         
-        console.log(this.angularSpd)
+        // console.log(this.angularSpd)
         // if it's past D but not yet at W
         if (this.rads < -4/3 * Math.PI - Spinner.SPIN_LENIENCY && this.rads > -2 * Math.PI + Spinner.SPIN_LENIENCY) {
             // and if it hasn't been checked yet

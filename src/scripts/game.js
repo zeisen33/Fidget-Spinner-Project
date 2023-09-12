@@ -3,7 +3,8 @@
 const Target = require("./target.js");
 const Bullet = require("./bullet.js");
 const Spinner = require("./spinner.js")
-const Background = require("./background.js")
+const Background = require("./background.js");
+const Util = require("./util")
 
 class Game {
     static DIM_X = window.innerWidth * 4
@@ -50,8 +51,15 @@ class Game {
     }
 
     randomPosition() {
-        const xPos = Math.random() * window.innerWidth
-        const yPos = Math.random() * window.innerHeight
+        let xPos = window.innerWidth/2.0, yPos = window.innerHeight/2.0
+
+        // Random position can't be too close to spinner (within 3/2 * Spinner size of center)
+        while (Util.distance({x: xPos, y: yPos}, {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}) < 3 * Spinner.SPINNER_SIZE/2.0) {
+            // console.log('too close!')
+            xPos = Math.random() * window.innerWidth
+            yPos = Math.random() * window.innerHeight
+        }
+
         return {x: xPos, y: yPos}
     }
 

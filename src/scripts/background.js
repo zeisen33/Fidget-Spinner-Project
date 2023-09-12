@@ -40,7 +40,7 @@ class Background extends MovingObject {
     move(delta) {
         // Need delta so vel formula calculated same way as MovingObj_relVel
         delta = delta || 1
-        
+
         // x and y vel must be less than or equal to max speed
         // Cases where limiting is necessary: > 0 and > max, < 0 and abs > max
         let dims = ['x','y']
@@ -77,7 +77,7 @@ class Background extends MovingObject {
 
 
     draw (ctx) {
-        console.log(`Xspeed: ${this.vel.x}, maxSpeed: ${this.maxSpeed}`) 
+        // console.log(`Xspeed: ${this.vel.x}, maxSpeed: ${this.maxSpeed}`) 
         // console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         // console.log(`vel: ${JSON.stringify(this.vel)}`)
         this.move()

@@ -22,8 +22,8 @@ class MovingObject {
         this.pos.x += this.relVel.x * delta / 40;
         this.pos.y += this.relVel.y * delta / 40;
         // const pos = this.pos           
-        console.log(`bground Y vel: ${this.game.background.vel.y}`)
-        console.log(`target y vel: ${this.vel.y}`)
+        // console.log(`bground Y vel: ${this.game.background.vel.y}`)
+        // console.log(`target y vel: ${this.vel.y}`)
     }
 
     remove(object) {
