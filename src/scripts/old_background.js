@@ -75,9 +75,9 @@ class Background extends MovingObject {
     }
 
     draw (ctx) {
-        console.log(`pos: ${JSON.stringify(this.pos.x)}`)
-        console.log(`vel: ${JSON.stringify(this.vel.x)}`)
-        console.log(`scroll: ${JSON.stringify(this.scroll.x)}`)
+        // console.log(`pos: ${JSON.stringify(this.pos.x)}`)
+        // console.log(`vel: ${JSON.stringify(this.vel.x)}`)
+        // console.log(`scroll: ${JSON.stringify(this.scroll.x)}`)
         this.move()
         
         ctx.clearRect(0, 0, Background.DIM_X, Background.DIM_Y)
@@ -101,8 +101,8 @@ class Background extends MovingObject {
         // if approaching top
         // 3880 - 410 = 3470
         if (this.pos.y >= Background.DIM_Y - this.stopY) {
-            console.log(this.stopY)
-            console.log(Background.DIM_Y - this.stopY)
+            // console.log(this.stopY)
+            // console.log(Background.DIM_Y - this.stopY)
 
             // clip from scrollY to innerHeight and put it at scrollY
             ctx.drawImage(this.bgroundImg, 0, 0, this.width, this.height, 0, this.scroll.y, this.width, this.height)

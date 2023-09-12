@@ -4,10 +4,10 @@ const Bullet = require("./bullet")
 
 class Spinner {
     static SPINNER_SIZE = 150
-    static START_ANG_SPD = 38.0
+    static START_ANG_SPD = 3
     static SPIN_LENIENCY = 0.6
     static MAX_ANG_SPD = 40
-    static MIN_ANG_SPD = 5
+    static MIN_ANG_SPD = 3
 
     constructor(options) { 
         const innerHeight = window.innerHeight
@@ -30,9 +30,9 @@ class Spinner {
     }
 
     drawText(ctx) {
-        console.log('writing text')
-        console.log(`text: ${this.text[0]}`)
-        console.log(`textLoc: ${this.center.x}, ${this.center.y -150}`)
+        // console.log('writing text')
+        // console.log(`text: ${this.text[0]}`)
+        // console.log(`textLoc: ${this.center.x}, ${this.center.y -150}`)
         ctx.fillStyle = `${this.textColor}`
 
         for (let i = 0; i < this.text.length; i++) {
@@ -88,26 +88,38 @@ class Spinner {
             if (this.reset === false) {
                 // then check
                 if (this.spinChecks['W'] === 'passed' && this.spinChecks['A'] === 'passed' && this.spinChecks['D'] === 'passed') {
-                    console.log('spin speed up!')
+                    // console.log('spin speed up!')
                     this.angularSpd += 1
-                    this.text.push('Speed Up!')
+                    this.text.push('Max Speed Up!')
+                    this.game.background.maxSpeedUp()
                     this.textColor = 'green'
                     // Max spin speed
-                    if (this.angularSpd >= Spinner.MAX_ANG_SPD) {
+                    if (this.angularSpd === Spinner.MAX_ANG_SPD) {
                         this.angularSpd = Spinner.MAX_ANG_SPD
-                        this.text.push('Max Speed Reached!')
-                        console.log('max spin speed reached')
+                        this.text.push('Highest Max Speed!')
+                        // console.log('max spin speed reached')
+                    } else if (this.angularSpd > Spinner.MAX_ANG_SPD) {
+                        this.angularSpd = Spinner.MAX_ANG_SPD
+                        this.text.push('Highest Max Speed!')
+                        // console.log('max spin speed reached')
+                        this.game.background.maxSpeedDown()
                     }
                 } else {
                     this.angularSpd -= 1
-                    this.text.push('Speed Down.')
+                    this.text.push('Max Speed Down.')
                     this.textColor = 'red'
-                    console.log('Spin Speed Down.')
-                    if (this.angularSpd <= Spinner.MIN_ANG_SPD) {
+                    this.game.background.maxSpeedDown()
+                    // console.log('Max Speed Down.')
+                    if (this.angularSpd === Spinner.MIN_ANG_SPD) {
                         this.angularSpd = Spinner.MIN_ANG_SPD
-                        this.text.push('Min Speed Reached.')
-                        console.log('min spin speed reached')
-                    } 
+                        this.text.push('At 0 Max Speed.')
+                        // console.log('min spin speed reached')
+                    } else if (this.angularSpd < Spinner.MIN_ANG_SPD) {
+                        this.angularSpd = Spinner.MIN_ANG_SPD
+                        this.text.push('At 0 Max Speed.')
+                        this.game.background.maxSpeed = 0
+                        // console.log('min spin speed reached')
+                    }
                 }
                 
                 this.spinChecks['W'] = 'not passed'
@@ -193,7 +205,7 @@ class Spinner {
             }
         }
         checkW()
-        console.log(this.spinChecks)
+        // console.log(this.spinChecks)
         // this.angularSpd += 1
     }
     
@@ -211,7 +223,7 @@ class Spinner {
             }
         }
         checkA()
-        console.log(this.spinChecks)
+        // console.log(this.spinChecks)
     }
     d() {
         const checkD = () => {   
@@ -227,7 +239,7 @@ class Spinner {
             }
         }
         checkD()
-        console.log(this.spinChecks)
+        // console.log(this.spinChecks)
     }
 }
     

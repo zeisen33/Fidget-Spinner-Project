@@ -6,7 +6,7 @@ const Util = require("./util")
 const Spinner = require("./spinner")
 
 class Background extends MovingObject {
-    
+
     static DIM_X = window.innerWidth * 4
     static DIM_Y = window.innerHeight * 4
 
@@ -30,12 +30,24 @@ class Background extends MovingObject {
                         up: this.height / 2 - Spinner.SPINNER_SIZE / 2,
                         down: this.height / 2 + Spinner.SPINNER_SIZE / 2
                     }
+        this.maxSpeed = 0
         // console.log(Background.DIM_Y)
     }
 
 
     // Overwrites movingObject.move
     move() {
+        // x and y vel must be less than or equal to max speed
+        // Cases where limiting is necessary: > 0 and > max, < 0 and abs > max
+        let dims = ['x','y']
+        for (let i = 0; i < dims.length; i++) {
+            if (this.vel[dims[i]] > 0 && this.vel[dims[i]] > this.maxSpeed) {
+                this.vel[dims[i]] = this.maxSpeed
+            } else if (this.vel[dims[i]] < 0 && Math.abs(this.vel[dims[i]]) > this.maxSpeed) {
+                this.vel[dims[i]] = -1 * this.maxSpeed
+            }
+        }
+
         // Can't move Out of Bounds (Oob)
         if (this.isOobUp(this.pos)) {
             console.log(`oobUp`)
@@ -61,6 +73,7 @@ class Background extends MovingObject {
 
 
     draw (ctx) {
+        console.log(`Xspeed: ${this.vel.x}, maxSpeed: ${this.maxSpeed}`) 
         // console.log(`pos: ${JSON.stringify(this.pos.y)}`)
         // console.log(`vel: ${JSON.stringify(this.vel)}`)
         this.move()
@@ -94,6 +107,16 @@ class Background extends MovingObject {
         }        
     }
     
+    maxSpeedUp() {
+        this.maxSpeed += 1
+    }
+
+    maxSpeedDown() {
+        this.maxSpeed -= 1
+        if (this.maxSpeed < 0) {
+            this.maxSpeed = 0
+        }
+    }
 }
 
 module.exports = Background
