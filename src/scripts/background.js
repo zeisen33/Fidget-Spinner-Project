@@ -6,6 +6,7 @@ const Util = require("./util")
 const Spinner = require("./spinner")
 
 class Background extends MovingObject {
+    
     static DIM_X = window.innerWidth * 4
     static DIM_Y = window.innerHeight * 4
 
