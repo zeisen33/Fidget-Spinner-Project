@@ -3,9 +3,11 @@ const Util = require("./util")
 const Bullet = require("./bullet")
 
 class Spinner {
+    // Need MIN_ANG_SPD = START_ANG_SPD for max speed to work properly
     static SPINNER_SIZE = 150
     static START_ANG_SPD = 3
     static SPIN_LENIENCY = 0.6
+    // Game too hard to reach 40
     static MAX_ANG_SPD = 40
     static MIN_ANG_SPD = 3
 
