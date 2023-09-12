@@ -6,8 +6,8 @@ class MovingObject {
     static HEIGHT = innerHeight * 4
 
     constructor(options) {
-        this.vel = options.vel || {x: 0, y: 0}
         this.game = options.game
+        this.vel = options.vel || {x: 0, y: 0}
         this.pos = options.pos || this.game.randomPosition()
         this.rads = 0
         this.ctx = this.game.ctx
@@ -15,12 +15,15 @@ class MovingObject {
 
     move(delta) {
         delta = delta || 1
+        this.relVel = {x: this.game.background.vel.x + this.vel.x, y: this.game.background.vel.y + this.vel.y}
         // console.log(`object: ${this}`)
         // console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
         // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
-        this.pos.x += this.vel.x * delta / 40;
-        this.pos.y += this.vel.y * delta / 40;
+        this.pos.x += this.relVel.x * delta / 40;
+        this.pos.y += this.relVel.y * delta / 40;
         // const pos = this.pos           
+        console.log(`bground Y vel: ${this.game.background.vel.y}`)
+        console.log(`target y vel: ${this.vel.y}`)
     }
 
     remove(object) {

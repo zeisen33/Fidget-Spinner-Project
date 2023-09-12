@@ -119,7 +119,8 @@ class Spinner {
                     } else if (this.angularSpd < Spinner.MIN_ANG_SPD) {
                         this.angularSpd = Spinner.MIN_ANG_SPD
                         this.text.push('At 0 Max Speed.')
-                        this.game.background.maxSpeed = 0
+                        // CHANGE to 0
+                        this.game.background.maxSpeed = 1 
                         // console.log('min spin speed reached')
                     }
                 }

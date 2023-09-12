@@ -30,13 +30,17 @@ class Background extends MovingObject {
                         up: this.height / 2 - Spinner.SPINNER_SIZE / 2,
                         down: this.height / 2 + Spinner.SPINNER_SIZE / 2
                     }
-        this.maxSpeed = 0
+        // CHANGE to 0
+        this.maxSpeed = 1
         // console.log(Background.DIM_Y)
     }
 
 
     // Overwrites movingObject.move
-    move() {
+    move(delta) {
+        // Need delta so vel formula calculated same way as MovingObj_relVel
+        delta = delta || 1
+        
         // x and y vel must be less than or equal to max speed
         // Cases where limiting is necessary: > 0 and > max, < 0 and abs > max
         let dims = ['x','y']
@@ -67,8 +71,8 @@ class Background extends MovingObject {
             this.vel.x = 0
         }
         
-        this.pos.y += this.vel.y
-        this.pos.x += this.vel.x
+        this.pos.y += this.vel.y * delta/40
+        this.pos.x += this.vel.x * delta/40
     }
 
 
