@@ -41,7 +41,7 @@ class Game {
     }
 
     addTarget() {
-        this.add(new Target({pos: this.randomPosition(), game: this}))
+        this.add(new Target({pos: this.randomPosition(), game: this, vel: this.randomVel(5)}))
     }
 
     addSpinner() {
@@ -61,6 +61,28 @@ class Game {
         }
 
         return {x: xPos, y: yPos}
+    }
+
+    // -5 <= randVel <= 5
+    randomVel(scalar) {
+        let randX = Math.random() * scalar
+        let randY = Math.random() * scalar
+        let dirX = Math.random()
+        let dirY = Math.random()
+        
+        if (dirX < 0.5) {
+            dirX = -1
+        } else {
+            dirX = 1
+        }
+
+        if (dirY < 0.5) {
+            dirY = -1
+        } else {
+            dirY = 1
+        }
+
+        return {x: dirX * randX, y: dirY * randY}
     }
 
     draw(ctx) {
