@@ -7,8 +7,9 @@ const Background = require("./background.js");
 const Util = require("./util")
 
 class Game {
-    static DIM_X = window.innerWidth * 4
-    static DIM_Y = window.innerHeight * 4
+    // CHANGE to 4+
+    static DIM_X = window.innerWidth * 1.5
+    static DIM_Y = window.innerHeight * 1.5
 
 
     constructor() {

@@ -2,8 +2,10 @@ const Game = require('./game')
 
 
 class MovingObject {
-    static WIDTH = innerWidth * 4
-    static HEIGHT = innerHeight * 4
+
+    // CHANGE to 4+
+    static WIDTH = window.innerWidth * 1.5
+    static HEIGHT = window.innerHeight * 1.5
 
     constructor(options) {
         this.game = options.game
@@ -11,6 +13,7 @@ class MovingObject {
         this.pos = options.pos || this.game.randomPosition()
         this.rads = 0
         this.ctx = this.game.ctx
+        this.isBounceable = false
     }
 
     move(delta) {
@@ -24,6 +27,20 @@ class MovingObject {
         // const pos = this.pos           
         // console.log(`bground Y vel: ${this.game.background.vel.y}`)
         // console.log(`target y vel: ${this.vel.y}`)
+        if (this.isOobX(this.pos)) {
+            if (this.isBounceable) {
+                this.vel.x = -1 * this.vel.x
+            } else {
+                this.game.remove(this)
+            }
+        }
+        if (this.isOobY(this.pos)) {
+            if (this.isBounceable) {
+                this.vel.y = -1 * this.vel.y
+            } else {
+                this.game.remove(this)
+            }
+        }
     }
 
     remove(object) {

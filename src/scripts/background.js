@@ -7,8 +7,9 @@ const Spinner = require("./spinner")
 
 class Background extends MovingObject {
 
-    static DIM_X = window.innerWidth * 4
-    static DIM_Y = window.innerHeight * 4
+    // CHANGE to 4+
+    static DIM_X = window.innerWidth * 1.5
+    static DIM_Y = window.innerHeight * 1.5
 
 
     constructor (options) {
@@ -31,7 +32,7 @@ class Background extends MovingObject {
                         down: this.height / 2 + Spinner.SPINNER_SIZE / 2
                     }
         // CHANGE to 0
-        this.maxSpeed = 1
+        this.maxSpeed = 5
         // console.log(Background.DIM_Y)
     }
 
