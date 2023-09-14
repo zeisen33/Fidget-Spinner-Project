@@ -1,11 +1,10 @@
-const Game = require('./game')
-
 
 class MovingObject {
 
     // CHANGE to 4+
     static WIDTH = window.innerWidth * 1.5
     static HEIGHT = window.innerHeight * 1.5
+    static SPINNER_SIZE = 150
 
     constructor(options) {
         this.game = options.game
@@ -14,9 +13,16 @@ class MovingObject {
         this.rads = 0
         this.ctx = this.game.ctx
         this.isBounceable = false
+        this.stop = {   right: MovingObject.WIDTH / 2 + MovingObject.SPINNER_SIZE / 2,
+                        left: MovingObject.WIDTH / 2 - MovingObject.SPINNER_SIZE / 2,
+                        up: MovingObject.HEIGHT / 2 + MovingObject.SPINNER_SIZE / 2,
+                        down: MovingObject.HEIGHT / 2 - MovingObject.SPINNER_SIZE / 2
+                    }
+        this.name = 'noName'
     }
 
     move(delta) {
+        console.log(this.name)
         delta = delta || 1
         this.relVel = {x: this.game.background.vel.x + this.vel.x, y: this.game.background.vel.y + this.vel.y}
         // console.log(`object: ${this}`)
@@ -28,6 +34,7 @@ class MovingObject {
         // console.log(`bground Y vel: ${this.game.background.vel.y}`)
         // console.log(`target y vel: ${this.vel.y}`)
         if (this.isOobX(this.pos)) {
+            console.log('oobX')
             if (this.isBounceable) {
                 this.vel.x = -1 * this.vel.x
             } else {
@@ -35,6 +42,7 @@ class MovingObject {
             }
         }
         if (this.isOobY(this.pos)) {
+            console.log('oobY')
             if (this.isBounceable) {
                 this.vel.y = -1 * this.vel.y
             } else {
@@ -48,27 +56,47 @@ class MovingObject {
     }
 
     isOobRight(pos) {
-        return pos.x > MovingObject.WIDTH
+        // console.log('oobRight')
+        if (pos.x > MovingObject.WIDTH - this.stop.right) {
+            console.log('oobRight')
+        }
+        return pos.x > MovingObject.WIDTH - this.stop.right
     }
 
     isOobLeft(pos) {
-        return pos.x < 0
+        // console.log('oobLeft')
+        console.log(this.stop.left)
+        if (pos.x < this.stop.left) {
+            console.log('oobLeft')
+        }
+        return pos.x < this.stop.left
     }
 
     isOobUp(pos) {
         // console.log(MovingObject.HEIGHT)
-        return pos.y > MovingObject.HEIGHT
+        // console.log('oobUp')
+        if (pos.y > this.stop.up) {
+            console.log('oobUp')
+        }
+        return pos.y > this.stop.up
     }
 
     isOobDown(pos) {
-        return pos.y < 0
+        // console.log('oobDown')
+        if (pos.y < MovingObject.HEIGHT - this.stop.down) {
+            console.log('oobDown')
+        }
+        return pos.y < MovingObject.HEIGHT - this.stop.down
     }
 
     isOobX(pos) {
+        console.log('check X')
+        // console.log(this.pos)
         return this.isOobRight(pos) || this.isOobLeft(pos)
     }
 
     isOobY(pos) {
+        // console.log(this.pos)
         return this.isOobUp(pos) || this.isOobDown(pos)
     }
 

@@ -55,19 +55,19 @@ class Background extends MovingObject {
 
         // Can't move Out of Bounds (Oob)
         if (this.isOobUp(this.pos)) {
-            console.log(`oobUp`)
+            // console.log(`oobUp`)
             this.pos.y = Background.DIM_Y
             this.vel.y = 0
         } else if (this.isOobDown(this.pos)) {
-            console.log('oobDown')
+            // console.log('oobDown')
             this.pos.y = 0
             this.vel.y = 0
         } else if (this.isOobLeft(this.pos)) {
-            console.log('oobLeft')
+            // console.log('oobLeft')
             this.pos.x = 0
             this.vel.x = 0
         } else if (this.isOobRight(this.pos)) {
-            console.log('oobRight')
+            // console.log('oobRight')
             this.pos.x = Background.DIM_X
             this.vel.x = 0
         }
@@ -121,6 +121,38 @@ class Background extends MovingObject {
         if (this.maxSpeed < 0) {
             this.maxSpeed = 0
         }
+    }
+
+
+
+
+    isOobRight(pos) {
+        return pos.x > MovingObject.WIDTH
+    }
+
+    isOobLeft(pos) {
+        return pos.x < 0
+    }
+
+    isOobUp(pos) {
+        // console.log(MovingObject.HEIGHT)
+        return pos.y > MovingObject.HEIGHT
+    }
+
+    isOobDown(pos) {
+        return pos.y < 0
+    }
+
+    isOobX(pos) {
+        return this.isOobRight(pos) || this.isOobLeft(pos)
+    }
+
+    isOobY(pos) {
+        return this.isOobUp(pos) || this.isOobDown(pos)
+    }
+
+    isOob(pos) {
+        return this.isOobX(pos) || this.isOobY(pos)
     }
 }
 
