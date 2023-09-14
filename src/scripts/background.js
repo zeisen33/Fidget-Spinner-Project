@@ -54,21 +54,22 @@ class Background extends MovingObject {
         }
 
         // Can't move Out of Bounds (Oob)
+        // bground moves opposite of spinner movement
         if (this.isOobUp(this.pos)) {
-            // console.log(`oobUp`)
+            console.log(`oobUp`)
             this.pos.y = Background.DIM_Y
             this.vel.y = 0
         } else if (this.isOobDown(this.pos)) {
-            // console.log('oobDown')
+            console.log('oobDown')
             this.pos.y = 0
             this.vel.y = 0
         } else if (this.isOobLeft(this.pos)) {
-            // console.log('oobLeft')
-            this.pos.x = 0
+            console.log('oobLeft')
+            this.pos.x = Background.DIM_X
             this.vel.x = 0
         } else if (this.isOobRight(this.pos)) {
-            // console.log('oobRight')
-            this.pos.x = Background.DIM_X
+            console.log('oobRight')
+            this.pos.x = 0
             this.vel.x = 0
         }
         
@@ -123,15 +124,12 @@ class Background extends MovingObject {
         }
     }
 
-
-
-
     isOobRight(pos) {
-        return pos.x > MovingObject.WIDTH
-    }
-
-    isOobLeft(pos) {
         return pos.x < 0
+    }
+    
+    isOobLeft(pos) {
+        return pos.x > MovingObject.WIDTH
     }
 
     isOobUp(pos) {

@@ -24,10 +24,12 @@ class MovingObject {
                     }
         // this.name = 'noName'
         this.relPos = {x: MovingObject.WIDTH/2, y: MovingObject.HEIGHT/2}
-        console.log(`stopLeft: ${this.stop.left}`)
+        // console.log(`stopLeft: ${this.stop.left}`)
+        console.log(`stopRight: ${this.stop.right}`)
     }
 
     move(delta) {
+        console.log(MovingObject.WIDTH - this.stop.right)
         console.log(`pos: ${this.pos.x}, relPos: ${this.relPos.x}, bgroundPos: ${this.game.background.pos.x}`)
         delta = delta || 1
 
@@ -36,27 +38,40 @@ class MovingObject {
         
 
 
-
-        this.relPos = {x: this.game.background.pos.x - this.pos.x, y: this.game.background.pos.y + this.pos.y}
+        // background vel is opposite direction of spinner movement
         this.relVel = {x: this.game.background.vel.x + this.vel.x, y: this.game.background.vel.y + this.vel.y}
         // console.log(`object: ${this}`)
         // console.log(`pos: ${{x: this.pos.x, y: this.pos.y}}`)
         // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
         this.pos.x += this.relVel.x * delta / 40
+        this.relPos = {x: this.game.background.pos.x - this.pos.x, y: this.game.background.pos.y + this.pos.y}
 
         
         if (this.isOobLeft(this)) {
             console.log('oobLeft')
-            // this.pos.x = this.stop.left - MovingObject.WIDTH/2
             this.relPos.x = MovingObject.WIDTH - this.stop.left
             this.pos.x = this.game.background.pos.x - this.relPos.x
             this.vel.x *= -1
         }
 
+        if (this.isOobRight(this)) {
+            console.log('oobRight')
+            // Solve oobRight check equation for relPos.x
+            this.relPos.x = -1 * (this.game.background.pos.x - this.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right)
+            this.pos.x = this.relPos.x + this.game.background.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right
+            this.vel.x *= -1
+        }
+
     }
         
+    // oob if spinner pos minus target pos > game width minus stopping width
     isOobLeft(obj) {
-        return this.relPos.x > MovingObject.WIDTH - this.stop.left
+        return this.relPos.x >= MovingObject.WIDTH - this.stop.left
+    }
+
+    // oob if 
+    isOobRight(obj) {
+        return this.pos.x - this.relPos.x - this.game.background.pos.x >= MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right
     }
 
 
