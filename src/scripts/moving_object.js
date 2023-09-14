@@ -28,8 +28,15 @@ class MovingObject {
     }
 
     move(delta) {
-        // console.log(`pos: ${this.pos.x}, relPos: ${this.relPos.x}`)
+        console.log(`pos: ${this.pos.x}, relPos: ${this.relPos.x}, bgroundPos: ${this.game.background.pos.x}`)
         delta = delta || 1
+
+
+        
+        
+
+
+
         this.relPos = {x: this.game.background.pos.x - this.pos.x, y: this.game.background.pos.y + this.pos.y}
         this.relVel = {x: this.game.background.vel.x + this.vel.x, y: this.game.background.vel.y + this.vel.y}
         // console.log(`object: ${this}`)
@@ -37,32 +44,21 @@ class MovingObject {
         // console.log(`vel: ${{x: this.vel.x, y: this.vel.y}}`)
         this.pos.x += this.relVel.x * delta / 40
 
-
-        if (this.relPos.x > 800) {
+        
+        if (this.isOobLeft(this)) {
             console.log('oobLeft')
+            // this.pos.x = this.stop.left - MovingObject.WIDTH/2
+            this.relPos.x = MovingObject.WIDTH - this.stop.left
+            this.pos.x = this.game.background.pos.x - this.relPos.x
+            this.vel.x *= -1
         }
 
+    }
+        
+    isOobLeft(obj) {
+        return this.relPos.x > MovingObject.WIDTH - this.stop.left
+    }
 
-        // const pos = this.pos           
-        // console.log(`bground Y vel: ${this.game.background.vel.y}`)
-        // console.log(`target y vel: ${this.vel.y}`)
-        // if (this.isOobX(this.relPos)) {
-        //     console.log('oobX')
-            // if (this.isBounceable) {
-            //     this.vel.x = -1 * this.vel.x
-            // } else {
-            //     this.game.remove(this)
-            // }
-        }
-        // if (this.isOobY(this.pos)) {
-        //     console.log('oobY')
-            // if (this.isBounceable) {
-            //     this.vel.y = -1 * this.vel.y
-            // } else {
-            //     this.game.remove(this)
-            // }
-        // }
-    // }
 
     remove(object) {
         this.game.remove(this)
@@ -72,3 +68,23 @@ class MovingObject {
 
 module.exports = MovingObject
   
+            // const pos = this.pos           
+            // console.log(`bground Y vel: ${this.game.background.vel.y}`)
+            // console.log(`target y vel: ${this.vel.y}`)
+            // if (this.isOobX(this.relPos)) {
+            //     console.log('oobX')
+                // if (this.isBounceable) {
+                //     this.vel.x = -1 * this.vel.x
+                // } else {
+                //     this.game.remove(this)
+                // }
+            
+            // if (this.isOobY(this.pos)) {
+            //     console.log('oobY')
+                // if (this.isBounceable) {
+                //     this.vel.y = -1 * this.vel.y
+                // } else {
+                //     this.game.remove(this)
+                // }
+            // }
+        // }
