@@ -6,7 +6,7 @@ class Target extends MovingObject {
     constructor (options) {
         super(options)
         this.isBounceable = true
-        this.name = 'Targ'
+        // this.name = 'Targ'
     }
      
     draw (ctx){
