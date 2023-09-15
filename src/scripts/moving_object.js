@@ -7,8 +7,8 @@ class MovingObject {
     static SPINNER_SIZE = 150
 
     constructor(options) {
-        console.log(`gameWidth: ${MovingObject.WIDTH}`)
-        console.log(`windowWidth: ${window.innerWidth}`)
+        // console.log(`gameWidth: ${MovingObject.WIDTH}`)
+        // console.log(`windowWidth: ${window.innerWidth}`)
         
         // console.log(MovingObject.HEIGHT)
         this.game = options.game
@@ -25,12 +25,12 @@ class MovingObject {
         // this.name = 'noName'
         this.relPos = {x: MovingObject.WIDTH/2, y: MovingObject.HEIGHT/2}
         // console.log(`stopLeft: ${this.stop.left}`)
-        console.log(`stopRight: ${this.stop.right}`)
+        // console.log(`stopRight: ${this.stop.right}`)
     }
 
     move(delta) {
-        console.log(MovingObject.WIDTH - this.stop.right)
-        console.log(`pos: ${this.pos.y}, relPos: ${this.relPos.y}, bgroundPos: ${this.game.background.pos.y}`)
+        // console.log(MovingObject.WIDTH - this.stop.right)
+        // console.log(`pos: ${this.pos.y}, relPos: ${this.relPos.y}, bgroundPos: ${this.game.background.pos.y}`)
         delta = delta || 1
 
         // background vel is opposite direction of spinner movement

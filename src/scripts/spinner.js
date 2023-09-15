@@ -171,20 +171,22 @@ class Spinner {
 
 
     fireBullet() {
+        console.log(this.hiddenPos)
+        console.log(this.hiddenVel)
         const norm = Util.norm(this.hiddenVel)
         // console.log(norm)
 
-        if (norm === 0) {
-            return
-        }
+        // if (norm === 0) {
+        //     return
+        // }
 
         const relVel = Util.scale(Util.dir(this.hiddenVel), Bullet.SPEED)
 
         const bulletVel = {x: relVel.x + this.hiddenVel.x, y: relVel.y + this.hiddenVel.y}
 
         const bullet = new Bullet({
-            vel: bulletVel,
-            pos: this.drawingPos,
+            vel: {x: 0, y: 0},
+            rads: this.rads,
             game: this.game
         })
 

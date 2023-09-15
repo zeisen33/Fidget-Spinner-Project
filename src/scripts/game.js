@@ -44,7 +44,8 @@ class Game {
     addTarget() {
 
         // change to randomPosition() and randomVel(5)
-        this.add(new Target({pos: {x: Game.DIM_X/3, y: Game.DIM_Y/3}, game: this, vel: {x: 0, y: 5}}))
+        // this.add(new Target({pos: {x: Game.DIM_X/3, y: Game.DIM_Y/3}, game: this, vel: {x: 0, y: 0}}))
+        this.add(new Target({pos: this.randomPosition(), game: this, vel: this.randomVel(0)}))
     }
 
     addSpinner() {
