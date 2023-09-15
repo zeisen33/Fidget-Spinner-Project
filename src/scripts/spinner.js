@@ -180,7 +180,11 @@ class Spinner {
 
         // Can't fire without moving
         if (norm === 0) {
-            this.text.push('Must be moving to shoot')
+            // if (!this.text.includes('Must be moving to shoot')) {
+            //     this.text.push('Must be moving to shoot')
+            // } else {
+            //     this.text.push(this.mustBeMoving)
+            // }
             return
         }
 
@@ -190,7 +194,8 @@ class Spinner {
         const bullet = new Bullet({
             vel: bulletVel,
             rads: this.rads,
-            game: this.game
+            game: this.game,
+            time: Date.now()
         })
 
         // console.log(bullet)

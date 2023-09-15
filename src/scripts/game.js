@@ -17,7 +17,8 @@ class Game {
         this.targets = []
         this.bullets = []
         this.background = new Background({game: this})
-
+        this.time = Date.now()
+        this.score = 0
         this.addTarget()
     }
 
@@ -79,7 +80,6 @@ class Game {
         } else {
             dirX = 1
         }
-
         if (dirY < 0.5) {
             dirY = -1
         } else {
@@ -104,6 +104,7 @@ class Game {
 
     step(delta) {
         this.moveObjects(delta)
+        this.checkCollisions()
     }
 
     remove(object) {
@@ -122,6 +123,26 @@ class Game {
         const allObjects = [].concat(this.background, this.spinners, this.targets, this.bullets)
         return allObjects
     }
+
+    checkCollisions() {
+        const target = this.targets[0]
+        for (let i = 0; i < this.bullets.length; i++) {
+            const bullet = this.bullets[i]
+
+            if (bullet.isCollidedWith(target)) {
+                this.targetHit(bullet, target)
+                return
+            }
+        }
+    }
+
+    targetHit(bullet, target) {
+        this.score += 1
+        this.remove(bullet)
+        this.remove(target)
+        this.addTarget()
+    }
+
 
     up() {
         // console.log('up')

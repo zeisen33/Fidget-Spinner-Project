@@ -1,5 +1,5 @@
 // Might want to recrop spinner img
-
+const Util = require('./util')
 
 const MovingObject = require("./moving_object")
 
@@ -14,6 +14,11 @@ class Bullet extends MovingObject{
         this.spinner = this.game.spinners[0]
         const center = {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}
         this.pos = {x: center.x - (Bullet.SPINNER_SIZE/2.0) * Math.sin(-1 * this.rads), y: center.y - (Bullet.SPINNER_SIZE/2.0) * Math.cos(-1 * this.rads)}
+    }
+
+    isCollidedWith(target) {
+        console.log(`bulletPos: ${JSON.stringify(this.pos)}, targetPos: ${JSON.stringify(target.pos)}`)
+        return Util.distance(this.pos, target.pos) < this.radius + target.radius 
     }
 
     draw (ctx) {

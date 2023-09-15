@@ -45,28 +45,44 @@ class MovingObject {
         
         if (this.isOobLeft(this)) {
             console.log('oobLeft')
-            this.relPos.x = MovingObject.WIDTH - this.stop.left
-            this.pos.x = this.game.background.pos.x - this.relPos.x
-            this.vel.x *= -1
+            if (this.isBounceable) {
+                this.relPos.x = MovingObject.WIDTH - this.stop.left
+                this.pos.x = this.game.background.pos.x - this.relPos.x
+                this.vel.x *= -1
+            } else {
+                this.remove(this)
+            }
         }
         if (this.isOobRight(this)) {
             console.log('oobRight')
             // Solve oobRight check equation for relPos.x
-            this.relPos.x = -1 * (this.game.background.pos.x - this.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right)
-            this.pos.x = this.relPos.x + this.game.background.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right
-            this.vel.x *= -1
+            if (this.isBounceable) {
+                this.relPos.x = -1 * (this.game.background.pos.x - this.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right)
+                this.pos.x = this.relPos.x + this.game.background.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right
+                this.vel.x *= -1
+            } else {
+                this.remove(this)
+            }
         }
         if (this.isOobUp(this)) {
             console.log('oobUp')
-            this.relPos.y = MovingObject.HEIGHT - this.stop.up
-            this.pos.y = this.game.background.pos.y - this.relPos.y
-            this.vel.y *= -1
+            if (this.isBounceable) {
+                this.relPos.y = MovingObject.HEIGHT - this.stop.up
+                this.pos.y = this.game.background.pos.y - this.relPos.y
+                this.vel.y *= -1
+            } else {
+                this.remove(this)
+            }
         }
         if (this.isOobDown(this)) {
             console.log('oobDown')
-            this.relPos.y = -1 * (this.game.background.pos.y - this.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down)
-            this.pos.y = this.relPos.y + this.game.background.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down
-            this.vel.y *= -1
+            if (this.isBounceable) {
+                this.relPos.y = -1 * (this.game.background.pos.y - this.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down)
+                this.pos.y = this.relPos.y + this.game.background.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down
+                this.vel.y *= -1
+            } else {
+                this.remove(this)
+            }
         }
     }
         
