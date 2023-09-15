@@ -26,8 +26,8 @@ class Spinner {
         this.angularSpd = Spinner.START_ANG_SPD
         this.spinChecks = {'W': 'not passed', 'A': 'not passed', 'D': 'not passed'}
         this.reset = false
-        this.text = []
-        this.textColor = null
+        this.text = ['Time W, A, and D presses to move faster.', 'Use Arrow keys to move', 'and space to shoot once moving.' ]
+        this.textColor = "green"
     }
 
     drawText(ctx) {
@@ -176,17 +176,16 @@ class Spinner {
 
         console.log(spinnerVel)
         const norm = Util.norm(spinnerVel)
-        console.log(norm)
+        console.log(norm) 
 
         // Can't fire without moving
         if (norm === 0) {
+            this.text.push('Must be moving to shoot')
             return
         }
 
         // x speed of bullet = sin(rads) * bulletSpeed + spinnerVelx
-
         const bulletVel = {x: Math.cos(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.x, y: Math.sin(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.y}
-
 
         const bullet = new Bullet({
             vel: bulletVel,
