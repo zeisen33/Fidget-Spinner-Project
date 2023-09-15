@@ -14,7 +14,7 @@ class MovingObject {
         this.game = options.game
         this.vel = options.vel || {x: 0, y: 0}
         this.pos = options.pos || this.game.randomPosition()
-        this.rads = 0
+        this.rads = options.rads || 0
         this.ctx = this.game.ctx
         this.isBounceable = false
         this.stop = {   right: window.innerWidth/ 2 + MovingObject.SPINNER_SIZE / 2,
