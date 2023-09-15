@@ -1,3 +1,6 @@
+// Might want to recrop spinner img
+
+
 const MovingObject = require("./moving_object")
 
 class Bullet extends MovingObject{
@@ -7,7 +10,7 @@ class Bullet extends MovingObject{
 
     constructor (options) {
         super(options)
-        console.log(this.rads)
+        // console.log(this.rads)
         this.spinner = this.game.spinners[0]
         const center = {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}
         this.pos = {x: center.x - (Bullet.SPINNER_SIZE/2.0) * Math.sin(-1 * this.rads), y: center.y - (Bullet.SPINNER_SIZE/2.0) * Math.cos(-1 * this.rads)}

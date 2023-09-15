@@ -171,21 +171,25 @@ class Spinner {
 
 
     fireBullet() {
-        // console.log(this.rads)
-        // console.log(this.hiddenVel)
-        const norm = Util.norm(this.hiddenVel)
-        // console.log(norm)
+        // Spinner vel opposite of background movement
+        const spinnerVel = {x: -1 * this.hiddenVel.x, y: -1 * this.hiddenVel.y}
 
-        // if (norm === 0) {
-        //     return
-        // }
+        console.log(spinnerVel)
+        const norm = Util.norm(spinnerVel)
+        console.log(norm)
 
-        const relVel = Util.scale(Util.dir(this.hiddenVel), Bullet.SPEED)
+        // Can't fire without moving
+        if (norm === 0) {
+            return
+        }
 
-        const bulletVel = {x: relVel.x + this.hiddenVel.x, y: relVel.y + this.hiddenVel.y}
+        // x speed of bullet = sin(rads) * bulletSpeed + spinnerVelx
+
+        const bulletVel = {x: Math.cos(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.x, y: Math.sin(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.y}
+
 
         const bullet = new Bullet({
-            vel: {x: 0, y: 0},
+            vel: bulletVel,
             rads: this.rads,
             game: this.game
         })
