@@ -1,5 +1,6 @@
 // Might want to recrop spinner img
 const Util = require('./util')
+const Target = require('./target')
 
 const MovingObject = require("./moving_object")
 
@@ -14,19 +15,25 @@ class Bullet extends MovingObject{
         this.spinner = this.game.spinners[0]
         const center = {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}
         this.pos = {x: center.x - (Bullet.SPINNER_SIZE/2.0) * Math.sin(-1 * this.rads), y: center.y - (Bullet.SPINNER_SIZE/2.0) * Math.cos(-1 * this.rads)}
+        // this.hiddenPos = {x: this.pos.x - this.game.background.pos.x, y: this.pos.y - this.game.background.pos.y}
     }
 
     isCollidedWith(target) {
-        console.log(`bulletPos: ${JSON.stringify(this.pos)}, targetPos: ${JSON.stringify(target.pos)}`)
-        return Util.distance(this.pos, target.pos) < this.radius + target.radius 
+        // console.log(`bulletPos: ${JSON.stringify(this.pos)}, targetPos: ${JSON.stringify(target.pos)}`)
+        // console.log(`bulletPos: ${JSON.stringify(this.pos)}, targetPos: ${JSON.stringify(target.pos)}`)
+        // console.log(`bulletPos: ${JSON.stringify(this.pos)}, targetPos: ${JSON.stringify(target.pos)}`)
+        // console.log(Bullet.RADIUS)
+        // console.log(Target.RADIUS)
+        // console.log(Util.distance(this.pos, target.pos))
+        return Util.distance(this.pos, target.pos) < Bullet.RADIUS + Target.RADIUS + 3
     }
 
     draw (ctx) {
         // debugger
-        // console.log(this.rads)
+        // console.log(this.pos.x)
         const blltImg = document.getElementById("bulletImg");
         // debugger
-        ctx.drawImage(blltImg, this.pos.x, this.pos.y, Bullet.RADIUS, Bullet.RADIUS);
+        ctx.drawImage(blltImg, this.pos.x, this.pos.y, Bullet.RADIUS * 2, Bullet.RADIUS * 2);
     }
 
     // hitTarget () {

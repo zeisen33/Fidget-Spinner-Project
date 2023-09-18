@@ -11,6 +11,7 @@ class Target extends MovingObject {
      
     draw (ctx){
         const targImg = document.getElementById("targetImg")
+        console.log(JSON.stringify(this.pos))
         ctx.drawImage(targImg, this.pos.x, this.pos.y, Target.RADIUS * 2, Target.RADIUS * 2)
         // console.log(`pos: ${JSON.stringify(this.pos)}`)
     }

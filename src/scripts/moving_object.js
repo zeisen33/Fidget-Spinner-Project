@@ -100,7 +100,9 @@ class MovingObject {
     isOobDown(obj) {
         return this.pos.y - this.relPos.y - this.game.background.pos.y -30 >= MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down
     }
-
+    isOob(obj) {
+        return this.isOobUp(obj) || this.isOobDown(obj) || this.isOobLeft(obj) || this.isOobRight(obj)
+    }
 
     remove(object) {
         this.game.remove(this)

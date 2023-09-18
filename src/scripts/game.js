@@ -5,6 +5,7 @@ const Bullet = require("./bullet.js");
 const Spinner = require("./spinner.js")
 const Background = require("./background.js");
 const Util = require("./util")
+const MovingObject = require("./moving_object.js")
 
 class Game {
     // CHANGE to 4+
@@ -13,6 +14,7 @@ class Game {
 
 
     constructor() {
+        console.log(Game.DIM_X)
         this.spinners = []
         this.targets = []
         this.bullets = []
@@ -43,10 +45,19 @@ class Game {
     }
 
     addTarget() {
+        // initiate new target OOB with randomVel
+        let xPos = -100
+        let yPos = -100
+        let newTarg = new Target({pos: {x: xPos, y: yPos}, game: this, vel: this.randomVel(5)})
 
-        // change to randomPosition() and randomVel(5)
-        // this.add(new Target({pos: {x: Game.DIM_X/3, y: Game.DIM_Y/3}, game: this, vel: {x: 0, y: 0}}))
-        this.add(new Target({pos: this.randomPosition(), game: this, vel: this.randomVel(0)}))
+        // loop until target is in bounds and not close to spinner
+        while (Util.distance({x: xPos, y: yPos}, {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}) < 3 * Spinner.SPINNER_SIZE/2.0
+                || newTarg.isOob(newTarg)) { 
+            xPos = Math.random() * window.innerWidth
+            yPos = Math.random() * window.innerHeight
+            newTarg.pos = {x: xPos, y: yPos}
+        }
+        this.add(newTarg)
     }
 
     addSpinner() {
@@ -59,10 +70,13 @@ class Game {
         let xPos = window.innerWidth/2.0, yPos = window.innerHeight/2.0
 
         // Random position can't be too close to spinner (within 3/2 * Spinner size of center)
-        while (Util.distance({x: xPos, y: yPos}, {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}) < 3 * Spinner.SPINNER_SIZE/2.0) {
+        while (Util.distance({x: xPos, y: yPos}, {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}) < 3 * Spinner.SPINNER_SIZE/2.0
+                // || this.isOob({x: xPos, y: yPos})) { 
+        ) {
             // console.log('too close!')
             xPos = Math.random() * window.innerWidth
             yPos = Math.random() * window.innerHeight
+
         }
 
         return {x: xPos, y: yPos}
@@ -125,11 +139,16 @@ class Game {
     }
 
     checkCollisions() {
+        // console.log('checking Collisions')
         const target = this.targets[0]
         for (let i = 0; i < this.bullets.length; i++) {
             const bullet = this.bullets[i]
 
+            // console.log(`targetPos: ${JSON.stringify(target.pos)}`)
+            // console.log(`bullet ${i} Pos: ${JSON.stringify(bullet.pos)}`)
             if (bullet.isCollidedWith(target)) {
+                // alert('target hit')
+                console.log('target hit')
                 this.targetHit(bullet, target)
                 return
             }
@@ -143,14 +162,14 @@ class Game {
         this.addTarget()
     }
 
-
+    
     up() {
         // console.log('up')
         // console.log(this.background.vel)
         this.background.vel.y += 1
         // console.log(this.background.vel)
     }
-
+    
     down() {
         this.background.vel.y -= 1
     }
@@ -165,6 +184,27 @@ class Game {
 }
 
 module.exports = Game
+// isPosOob(pos) {
+//     return this.isPosOobX(pos) || this.isPosOobY(pos)
+// }
+// isPosOobX(pos) {
+//     return this.isPosOobLeft(pos) || this.isPosOobRight(pos)
+// }
+// isPosOobY(pos) {
+//     return this.isPosOobUp(pos) || this.isPosOobDown(pos)
+// }
+// isPosOobLeft(pos) {
+//     return pos.x <= 0
+// }
+// isPosOobRight(pos){
+//     return pos.x >= Game.DIM_X
+// }
+// isPosOobUp(pos) {
+//     return pos.y <= 0
+// }
+// isPosOobDown(pos) {
+//     return pos.y >= Game.DIM_Y
+// }
 // function Game() {
 //     this.targets = [];
 //     this.bullets = [];

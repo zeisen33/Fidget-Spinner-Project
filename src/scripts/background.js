@@ -33,7 +33,7 @@ class Background extends MovingObject {
                     }
         // CHANGE to 0
         this.maxSpeed = 5
-        // console.log(Background.DIM_Y)
+        // console.log(JSON.stringify(this.pos))
     }
 
 

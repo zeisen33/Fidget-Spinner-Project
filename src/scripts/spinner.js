@@ -174,19 +174,19 @@ class Spinner {
         // Spinner vel opposite of background movement
         const spinnerVel = {x: -1 * this.hiddenVel.x, y: -1 * this.hiddenVel.y}
 
-        console.log(spinnerVel)
+        // console.log(spinnerVel)
         const norm = Util.norm(spinnerVel)
-        console.log(norm) 
+        // console.log(norm) 
 
         // Can't fire without moving
-        if (norm === 0) {
-            // if (!this.text.includes('Must be moving to shoot')) {
-            //     this.text.push('Must be moving to shoot')
-            // } else {
-            //     this.text.push(this.mustBeMoving)
-            // }
-            return
-        }
+        // if (norm === 0) {
+        //     // if (!this.text.includes('Must be moving to shoot')) {
+        //     //     this.text.push('Must be moving to shoot')
+        //     // } else {
+        //     //     this.text.push(this.mustBeMoving)
+        //     // }
+        //     return
+        // }
 
         // x speed of bullet = sin(rads) * bulletSpeed + spinnerVelx
         const bulletVel = {x: Math.cos(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.x, y: Math.sin(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.y}
