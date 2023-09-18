@@ -5,7 +5,7 @@ const Target = require('./target')
 const MovingObject = require("./moving_object")
 
 class Bullet extends MovingObject{
-    static RADIUS = 10
+    static RADIUS = 7
     static SPEED = 5
     static SPINNER_SIZE = 150
 
