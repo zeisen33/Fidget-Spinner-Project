@@ -75,7 +75,11 @@ class MovingObject {
             }
         }
         if (this.isOobDown(this)) {
-            console.log('oobDown')
+            // console.log('oobDown')
+            // console.log(`relPos: ${this.relPos.y}`)
+            // console.log(`pos: ${this.pos.y}`)
+            // console.log(`stop: ${this.stop.down}`)
+            // console.log(`height: ${MovingObject.HEIGHT}`)
             if (this.isBounceable) {
                 this.relPos.y = -1 * (this.game.background.pos.y - this.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down)
                 this.pos.y = this.relPos.y + this.game.background.pos.y + MovingObject.SPINNER_SIZE/2 + MovingObject.HEIGHT - this.stop.down
