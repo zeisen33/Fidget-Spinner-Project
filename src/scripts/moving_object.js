@@ -2,8 +2,8 @@
 class MovingObject {
 
     // CHANGE to 4+
-    static WIDTH = window.innerWidth * 2
-    static HEIGHT = window.innerHeight * 2
+    static WIDTH = window.innerWidth * 1.5
+    static HEIGHT = window.innerHeight * 1.5
     static SPINNER_SIZE = 150
 
     constructor(options) {

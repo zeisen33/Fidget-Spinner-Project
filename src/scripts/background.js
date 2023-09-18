@@ -8,8 +8,8 @@ const Spinner = require("./spinner")
 class Background extends MovingObject {
 
     // CHANGE to 4+
-    static DIM_X = window.innerWidth * 2
-    static DIM_Y = window.innerHeight * 2
+    static DIM_X = window.innerWidth * 1.5
+    static DIM_Y = window.innerHeight * 1.5
 
 
     constructor (options) {
