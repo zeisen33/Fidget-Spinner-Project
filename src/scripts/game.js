@@ -44,10 +44,16 @@ class Game {
         }
     }
 
+    // for Testing
+    t() {
+        this.addTarget()
+    }
+
     addTarget() {
         // initiate new target OOB with randomVel
-        let xPos = -100
-        let yPos = -100
+        let pos = this.randomPosition()
+        let xPos = pos['x']
+        let yPos = pos['y']
         let newTarg = new Target({pos: {x: xPos, y: yPos}, game: this, vel: this.randomVel(5)})
 
         // loop until target is in bounds and not close to spinner
@@ -56,7 +62,9 @@ class Game {
             xPos = Math.random() * window.innerWidth
             yPos = Math.random() * window.innerHeight
             newTarg.pos = {x: xPos, y: yPos}
+            console.log(newTarg)
         }
+        console.log(newTarg)
         this.add(newTarg)
     }
 

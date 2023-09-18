@@ -26,6 +26,9 @@ class GameView {
         key('w', () => spinner.w())
         key('a', () => spinner.a())
         key('d', () => spinner.d())
+        
+        // for testing
+        key('t', () => game.t())
     }
 
     animate(currTime) {
