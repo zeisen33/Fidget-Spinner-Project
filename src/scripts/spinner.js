@@ -1,5 +1,6 @@
 const Util = require("./util")
 const Bullet = require("./bullet")
+const GameView = require("./game_view")
 
 class Spinner {
     // Need MIN_ANG_SPD = START_ANG_SPD for max speed to work properly
@@ -49,6 +50,8 @@ class Spinner {
 
         const restart = () => {
             alert(`Game over!\n Score: ${this.game.score} `)
+
+            this.game.end = true
         }
 
         const checkTime = () => {
@@ -67,7 +70,7 @@ class Spinner {
         } else {
             ctx.fillStyle = 'red'
         }
-        checkTime
+        checkTime()
         
 
         for (let i = 0; i < this.gameText.length; i++) {
@@ -217,14 +220,21 @@ class Spinner {
         //     return
         // }
 
+        // Can't shoot if there's already a bullet
+        if (this.game.bullets.length > 0) {
+            return
+        }
+
+
         // x speed of bullet = sin(rads) * bulletSpeed + spinnerVelx
         const bulletVel = {x: Math.cos(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.x, y: Math.sin(this.rads - Math.PI/2) * Bullet.SPEED + spinnerVel.y}
 
         const bullet = new Bullet({
             vel: bulletVel,
             rads: this.rads,
-            game: this.game,
-            time: Date.now()
+            game: this.game
+
+            // Bullets will be removed after a certain amount of time
         })
 
         // console.log(bullet)

@@ -15,6 +15,7 @@ class Game {
 
     constructor() {
         // console.log(Game.DIM_X)
+        this.end = false
         this.startTime = Date.now()
         this.spinners = []
         this.targets = []

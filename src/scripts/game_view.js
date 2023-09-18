@@ -6,6 +6,7 @@ class GameView {
         this.game = game
         this.ctx = ctx
         this.spinner = this.game.addSpinner()
+        this.highScore = 0
     }
 
     start() {
@@ -38,7 +39,14 @@ class GameView {
         this.game.draw(this.ctx)
         this.lastTime = currTime
 
-        requestAnimationFrame(this.animate.bind(this))
+        if (!this.game.end) {
+            requestAnimationFrame(this.animate.bind(this))
+        } else {
+            this.highScore = Math.max(this.game.score, this.highScore)
+            this.game = new Game(this.ctx)
+            this.spinner = this.game.addSpinner()
+            this.start()
+        }
     }
 }
 
