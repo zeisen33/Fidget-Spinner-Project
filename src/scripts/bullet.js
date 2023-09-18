@@ -42,9 +42,9 @@ class Bullet extends MovingObject{
         const now = Date.now()
         const fireTime = this.time
         const timeOut = Math.round((now - fireTime)/1000)
-            console.log(`now: ` + now)
-            console.log(fireTime)
-            console.log(timeOut)
+            // console.log(`now: ` + now)
+            // console.log(fireTime)
+            // console.log(timeOut)
     
         if (timeOut > Bullet.LIFE_TIME) {
             this.remove(this)

@@ -2,8 +2,8 @@
 class MovingObject {
 
     // CHANGE to 4+
-    static WIDTH = window.innerWidth * 1.5
-    static HEIGHT = window.innerHeight * 1.5
+    static WIDTH = window.innerWidth * 2
+    static HEIGHT = window.innerHeight * 2
     static SPINNER_SIZE = 150
 
     constructor(options) {
@@ -44,7 +44,7 @@ class MovingObject {
 
         
         if (this.isOobLeft(this)) {
-            console.log('oobLeft')
+            // console.log('oobLeft')
             if (this.isBounceable) {
                 this.relPos.x = MovingObject.WIDTH - this.stop.left
                 this.pos.x = this.game.background.pos.x - this.relPos.x
@@ -54,7 +54,7 @@ class MovingObject {
             }
         }
         if (this.isOobRight(this)) {
-            console.log('oobRight')
+            // console.log('oobRight')
             // Solve oobRight check equation for relPos.x
             if (this.isBounceable) {
                 this.relPos.x = -1 * (this.game.background.pos.x - this.pos.x + MovingObject.SPINNER_SIZE/2 + MovingObject.WIDTH - this.stop.right)
@@ -65,7 +65,7 @@ class MovingObject {
             }
         }
         if (this.isOobUp(this)) {
-            console.log('oobUp')
+            // console.log('oobUp')
             if (this.isBounceable) {
                 this.relPos.y = MovingObject.HEIGHT - this.stop.up
                 this.pos.y = this.game.background.pos.y - this.relPos.y

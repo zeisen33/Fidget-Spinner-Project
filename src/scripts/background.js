@@ -8,8 +8,8 @@ const Spinner = require("./spinner")
 class Background extends MovingObject {
 
     // CHANGE to 4+
-    static DIM_X = window.innerWidth * 1.5
-    static DIM_Y = window.innerHeight * 1.5
+    static DIM_X = window.innerWidth * 2
+    static DIM_Y = window.innerHeight * 2
 
 
     constructor (options) {
@@ -31,8 +31,8 @@ class Background extends MovingObject {
                         up: this.height / 2 - Spinner.SPINNER_SIZE / 2,
                         down: this.height / 2 + Spinner.SPINNER_SIZE / 2
                     }
-        // CHANGE to 0
-        this.maxSpeed = 5
+        // when Spin speed at lowest, maxSpeed = 0
+        this.maxSpeed = Spinner.START_ANG_SPD - Spinner.MIN_ANG_SPD
         // console.log(JSON.stringify(this.pos))
     }
 
@@ -56,19 +56,19 @@ class Background extends MovingObject {
         // Can't move Out of Bounds (Oob)
         // bground moves opposite of spinner movement
         if (this.isOobUp(this.pos)) {
-            console.log(`oobUp`)
+            // console.log(`oobUp`)
             this.pos.y = Background.DIM_Y
             this.vel.y = 0
         } else if (this.isOobDown(this.pos)) {
-            console.log('oobDown')
+            // console.log('oobDown')
             this.pos.y = 0
             this.vel.y = 0
         } else if (this.isOobLeft(this.pos)) {
-            console.log('oobLeft')
+            // console.log('oobLeft')
             this.pos.x = Background.DIM_X
             this.vel.x = 0
         } else if (this.isOobRight(this.pos)) {
-            console.log('oobRight')
+            // console.log('oobRight')
             this.pos.x = 0
             this.vel.x = 0
         }

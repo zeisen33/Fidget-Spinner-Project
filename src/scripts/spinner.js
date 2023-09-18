@@ -9,7 +9,8 @@ class Spinner {
     static SPIN_LENIENCY = 0.6
     // Game too hard to reach 40
     static MAX_ANG_SPD = 40
-    static MIN_ANG_SPD = 3
+    static MIN_ANG_SPD = 1
+    static STARTING_TIME = 120
 
     constructor(options) { 
         const innerHeight = window.innerHeight
@@ -29,7 +30,7 @@ class Spinner {
         this.reset = false
         this.text = ['Time W, A, and D presses to move faster.', 'Use Arrow keys to move', 'and space to shoot once moving.' ]
         this.textColor = "green"
-        this.time = 60
+        this.time = Spinner.STARTING_TIME
         this.gameText = [`Time Left: 60`, `Score: 0`]
     }
 
@@ -49,7 +50,7 @@ class Spinner {
         ctx.textBaseline = 'middle'
 
         const restart = () => {
-            alert(`Game over!\n Score: ${this.game.score} `)
+            alert(`Game over!\nScore: ${this.game.score} `)
 
             this.game.end = true
         }
@@ -61,7 +62,7 @@ class Spinner {
         }
 
 
-        this.time = Math.round(60 - (Date.now() - this.game.startTime)/1000)
+        this.time = Math.round(Spinner.STARTING_TIME - (Date.now() - this.game.startTime)/1000)
         
         this.gameText = [`Time Left: ${this.time}`, `Score: ${this.game.score}`]
         
@@ -151,7 +152,7 @@ class Spinner {
                         this.angularSpd = Spinner.MIN_ANG_SPD
                         this.text.push('At 0 Max Speed.')
                         // CHANGE to 0
-                        this.game.background.maxSpeed = 5 
+                        this.game.background.maxSpeed = 0 
                         // console.log('min spin speed reached')
                     }
                 }
