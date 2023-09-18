@@ -1,7 +1,7 @@
 const MovingObject = require("./moving_object")
 
 class Target extends MovingObject {
-    static RADIUS = 25
+    static RADIUS = 27
 
     constructor (options) {
         super(options)

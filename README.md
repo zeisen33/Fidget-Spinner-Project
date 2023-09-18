@@ -17,7 +17,8 @@ Game wireframe: https://wireframe.cc/avVOL9
 
 The game takes up the full screen, with all controls buttons and links transparent.
 
-space_background.jpeg source: https://wallpaperaccess.com/2d-space
+space_background_1.jpeg source: https://wallpaperaccess.com/2d-space
+space_background.jpeg source: https://www.hdwallpapers.in/stars_space_darkness_night_black_sky_background_hd_space-wallpapers.html
 
 laser spinner from: https://www.pngwing.com/en/search?q=fidget+Spinner
 
