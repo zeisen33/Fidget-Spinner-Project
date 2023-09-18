@@ -28,6 +28,8 @@ class Spinner {
         this.reset = false
         this.text = ['Time W, A, and D presses to move faster.', 'Use Arrow keys to move', 'and space to shoot once moving.' ]
         this.textColor = "green"
+        this.time = 60
+        this.gameText = [`Time Left: 60`, `Score: 0`]
     }
 
     drawText(ctx) {
@@ -44,7 +46,34 @@ class Spinner {
     draw(ctx) {
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
+
+        const restart = () => {
+            alert(`Game over!\n Score: ${this.game.score} `)
+        }
+
+        const checkTime = () => {
+            if (this.time < 0) {
+                restart()
+            }
+        }
+
+
+        this.time = Math.round(60 - (Date.now() - this.game.startTime)/1000)
         
+        this.gameText = [`Time Left: ${this.time}`, `Score: ${this.game.score}`]
+        
+        if (this.time > 10) {
+            ctx.fillStyle = 'blue'
+        } else {
+            ctx.fillStyle = 'red'
+        }
+        checkTime
+        
+
+        for (let i = 0; i < this.gameText.length; i++) {
+            ctx.fillText(this.gameText[i], this.center.x, this.center.y + 150 + i * 20)
+        }
+
         const checkColor = (spinLetter) => {
             // console.log(this.spinChecks[spinLetter])
             if (this.spinChecks[`${spinLetter}`] === 'not passed') {

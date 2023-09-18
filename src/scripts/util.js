@@ -46,9 +46,4 @@ export const drawCircle = (ctx, color, pos, rad) => {
         2 * Math.PI,
         false
     )
-
-    // ctx.font = '20px Arial'
-    // ctx.fillText('W', pos.x - 9, pos.y + 8)
-    // ctx.strokeStyle = 'white'
-    // ctx.stroke()
 }

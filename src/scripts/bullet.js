@@ -1,4 +1,3 @@
-// Might want to recrop spinner img
 const Util = require('./util')
 const Target = require('./target')
 

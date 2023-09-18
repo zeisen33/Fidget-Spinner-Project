@@ -21,7 +21,12 @@ class Game {
         this.bullets = []
         this.background = new Background({game: this})
         this.score = 0
+        // this.now = Date.now()
+        // this.time = 60 - (this.now - this.startTime)
         this.addTarget()
+        this.highScore = {highScore: 0, current: false}
+        // this.text = [`Time Left: ${this.time}`, `Score: ${this.score}`]
+        // this.center = {x: window.innerWidth / 2.0, y: window.innerHeight / 2.0}
     }
 
     add(object) {

@@ -115,24 +115,3 @@ class MovingObject {
 }
 
 module.exports = MovingObject
-  
-            // const pos = this.pos           
-            // console.log(`bground Y vel: ${this.game.background.vel.y}`)
-            // console.log(`target y vel: ${this.vel.y}`)
-            // if (this.isOobX(this.relPos)) {
-            //     console.log('oobX')
-                // if (this.isBounceable) {
-                //     this.vel.x = -1 * this.vel.x
-                // } else {
-                //     this.game.remove(this)
-                // }
-            
-            // if (this.isOobY(this.pos)) {
-            //     console.log('oobY')
-                // if (this.isBounceable) {
-                //     this.vel.y = -1 * this.vel.y
-                // } else {
-                //     this.game.remove(this)
-                // }
-            // }
-        // }
