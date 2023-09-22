@@ -2,6 +2,7 @@
 const Game = require("./scripts/game.js");
 const GameView = require("./scripts/game_view.js")
 
+
 window.GameView = GameView
 window.Game = Game
 
