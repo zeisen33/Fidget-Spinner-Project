@@ -5,6 +5,7 @@ const GameView = require("./scripts/game_view.js")
 window.GameView = GameView
 window.Game = Game
 
+
 document.addEventListener("DOMContentLoaded", function(){
     const canvasEl = document.getElementById("background");
     canvasEl.width = window.innerWidth;
