@@ -4,6 +4,7 @@ class Target extends MovingObject {
     static RADIUS = 27
 
     constructor (options) {
+        
         super(options)
         this.isBounceable = true
         // this.name = 'Targ'
@@ -15,7 +16,7 @@ class Target extends MovingObject {
         // console.log(JSON.stringify(this.pos))
         ctx.drawImage(targImg, this.pos.x, this.pos.y, Target.RADIUS * 2, Target.RADIUS * 2)
         // console.log(`pos: ${JSON.stringify(this.pos)}`)
-        
+
     }
 }
 
