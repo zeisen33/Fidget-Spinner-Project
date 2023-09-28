@@ -11,17 +11,8 @@ class Background extends MovingObject {
     static DIM_X = window.innerWidth * 1.5
     static DIM_Y = window.innerHeight * 1.5
 
-
     constructor (options) {
-        // Why can't I use Game.DIM_X or Game.DIM_Y here?
-        // console.log(`innerHeight: ${window.innerHeight}`)
         super(options)
-        // console.log(Background.DIM_X)
-        // console.log(Game.WIDTH)
-        // console.log(this.game)
-        // console.log(this.game.width)
-        // console.log(this.game.WIDTH)
-        // console.log(this.game.getGameHeight())
         this.bgroundImg = document.getElementById("bground");
         this.height = window.innerHeight;
         this.width = window.innerWidth;
@@ -35,7 +26,6 @@ class Background extends MovingObject {
         this.maxSpeed = Spinner.START_ANG_SPD - Spinner.MIN_ANG_SPD
         // console.log(JSON.stringify(this.pos))
     }
-
 
     // Overwrites movingObject.move
     move(delta) {
@@ -152,6 +142,7 @@ class Background extends MovingObject {
     isOob(pos) {
         return this.isOobX(pos) || this.isOobY(pos)
     }
+    
 }
 
 module.exports = Background
