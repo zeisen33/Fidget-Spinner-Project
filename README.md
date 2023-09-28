@@ -21,7 +21,3 @@ laser spinner from: https://www.pngwing.com/en/search?q=fidget+Spinner
 laser circle from: https://www.vecteezy.com/png/10956682-neon-green-circle-banner-neon-circle
 
 target from: https://www.iconfinder.com/icons/4043201/aim_goal_goals_mission_objective_target_vision_icon
-
-
-
-<!-- There's a little screen in the bottom left corner to show timing button presses. -->

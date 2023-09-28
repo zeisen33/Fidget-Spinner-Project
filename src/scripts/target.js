@@ -1,10 +1,11 @@
 const MovingObject = require("./moving_object")
 
 class Target extends MovingObject {
+    
     static RADIUS = 27
 
     constructor (options) {
-        
+
         super(options)
         this.isBounceable = true
         // this.name = 'Targ'
